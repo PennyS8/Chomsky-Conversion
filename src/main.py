@@ -132,4 +132,4 @@ def convert_cfl(cfl):
         sys.exit()
 
 if __name__ == '__main__':
-   main(os.listdir()[0])
+   main(os.getcwd())
