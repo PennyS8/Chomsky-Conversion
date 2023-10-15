@@ -62,7 +62,7 @@ def export_JSON(output_cfl, output_file_path):
 # TODO: delete print statements once program is finished
 # Print statements have been included to allow us to see the change
 # from our conversions without opening the input and output files
-def main():
+def main(current_path):
     '''
     Main function will convert all CFL files within the input_CFLs directory
     Then store the output into the output_CFLs directory with the same file
@@ -71,15 +71,20 @@ def main():
     input_directory = 'input_CFLs'
     output_directory = 'output_CFLs'
 
+    current_input_directory = os.path.join(current_path, input_directory)
+    current_output_directory = os.path.join(current_path, output_directory)
+
+
     # loop through all the input files in the input_CFLs directory
-    for filename in os.listdir(input_directory):
+    for filename in os.listdir(current_input_directory):
+        output_file_path = os.path.join(current_output_directory, filename)
 
-        output_file_path = os.path.join(output_directory, filename)
+        input_file_path = os.path.join(current_input_directory, filename)
 
-        input_file_path = os.path.join(input_directory, filename)
         if not os.path.isfile(input_file_path):
             print('file at ' + input_file_path + ' is not of JSON file format')
         else:
+            os.chmod(input_file_path, 0o777)
             cfl = import_JSON(input_file_path)
 
             print('input_CFL: ')
@@ -126,7 +131,5 @@ def convert_cfl(cfl):
         print("Invalid key in data: " + e)
         sys.exit()
 
-
-
 if __name__ == '__main__':
-    main()
+   main(os.listdir()[0])
