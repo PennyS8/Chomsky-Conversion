@@ -2,13 +2,20 @@
     "variables": [
         "V",
         "W",
-        "S"
+        "S",
+        "S_0"
     ],
     "terminals": [
         "a",
         "b"
     ],
     "production_rules": [
+        {
+            "LHS": "S_0",
+            "RHS": [
+                "S"
+            ]
+        },
         {
             "LHS": "S",
             "RHS": [
@@ -33,5 +40,5 @@
             ]
         }
     ],
-    "start_state": "S"
+    "start_state": "S_0"
 }
