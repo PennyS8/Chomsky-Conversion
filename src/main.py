@@ -75,6 +75,10 @@ def main(current_path):
     current_output_directory = os.path.join(current_path, output_directory)
 
 
+    current_input_directory = os.path.join(current_path, input_directory)
+    current_output_directory = os.path.join(current_path, output_directory)
+
+
     # loop through all the input files in the input_CFLs directory
     for filename in os.listdir(current_input_directory):
         output_file_path = os.path.join(current_output_directory, filename)
@@ -104,14 +108,65 @@ def main(current_path):
             export_JSON(cfl, output_file_path)
 
 
+def newVariable(variables):
+    """
+    Create a new unique variable and append it to the variables list.
+    Note: This function currently finds a variable of the form "Xn" where n
+    is an integer greater than or equal to zero.
+    TODO: change this function to create a unique single character symbol
+    at least up to the whole 26 letter alphabet.
+    """
+    var = "X"
+    i = 0
+    while (var + i) in variables:
+        i+=1
+    variables.append(var + i)
+
+def new_start_rule(cfl):
+    print()
+    print("new start rule")
+    
+    counter = 0
+    if (cfl.start_state[0] + "_" + str(counter)) == cfl.start_state:
+        counter += 1
+    
+    new_start_string = cfl.start_state[0] + "_" + str(counter)
+    cfl.production_rules.insert(0, dict(LHS = new_start_string, RHS = list(cfl.start_state)))
+
+    cfl.start_state = new_start_string
+    cfl.variables.append(new_start_string)
+    
+
+    print("created start rule")
+    print()
+    return cfl
+
+def test_for_errors(cfl):
+    """
+    Helper function that will be used to check if cfl is valid. If it's not valid, don't continue the program. 
+    NOTE: only checks if there is multiple start rules for now but may include other functions in future.
+    """
+
+    #check to see if start_state contains more than one element and if so, this is incorrect format and terminate program.
+    if type(cfl.start_state) is list:
+        if len(cfl.start_state) > 1:
+            print("Error in CFG input")
+            sys.exit()
 
 def convert_cfl(cfl):
     """
     Helper function for main()
     Convert the CFL obj into Chomsky Normal Form
     """
-    try: pass
-        # TODO: call new_start_rule()
+    try:
+        
+        # NOTE: it's unconventional to have integers as terminals/non-terminals, but it's still possible.
+        # in addition, uppercase terminals and lowercase variables are possible aswell.
+
+        test_for_errors(cfl)
+
+        new_start_rule(cfl)
+        
 
         # TODO: call eliminate_useless_rules)()
 
