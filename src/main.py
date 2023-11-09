@@ -1,6 +1,7 @@
 import sys
 import os
 import json
+import re
 
 class CFL:
     """
@@ -53,7 +54,8 @@ def export_JSON(output_cfl, output_file_path):
     but instead will overwrite existing file with that file name.
     """
     if os.path.exists(output_file_path):
-        print("Warning: Output file at: " + output_file_path + " already existed, and is now overwritten")
+        print("Warning: Output file at: " + output_file_path +
+                " already existed, and is now overwritten")
     with open(output_file_path, "w") as file:
         json.dump(output_cfl.__dict__, file, indent=4)
 
@@ -74,24 +76,21 @@ def main(current_path):
     current_input_directory = os.path.join(current_path, input_directory)
     current_output_directory = os.path.join(current_path, output_directory)
 
-
     current_input_directory = os.path.join(current_path, input_directory)
     current_output_directory = os.path.join(current_path, output_directory)
 
-
-    # loop through all the input files in the input_CFLs directory
+    # loop through all the input files in the input_CFLs directory and convert them
     for filename in os.listdir(current_input_directory):
         output_file_path = os.path.join(current_output_directory, filename)
-
         input_file_path = os.path.join(current_input_directory, filename)
 
         if not os.path.isfile(input_file_path):
-            print("file at " + input_file_path + " is not of JSON file format")
+            print("File at " + input_file_path + " is not of JSON file format")
         else:
             os.chmod(input_file_path, 0o777)
             cfl = import_JSON(input_file_path)
 
-            print("input_CFL: ")
+            print("\ninput_CFL: ")
             print(cfl.variables)
             print(cfl.terminals)
             print(cfl.production_rules)
@@ -99,13 +98,50 @@ def main(current_path):
 
             convert_cfl(cfl)
 
-            print("output_CFL: ")
+            print("\noutput_CFL: ")
             print(cfl.variables)
             print(cfl.terminals)
             print(cfl.production_rules)
             print(cfl.start_state)
 
             export_JSON(cfl, output_file_path)
+
+
+
+def convert_cfl(cfl):
+    """
+    Helper function for main()
+    Convert the CFL obj into Chomsky Normal Form
+    """
+    try:
+        # NOTE: it's unconventional to have integers as terminals/non-terminals, but
+        # it's still possible. in addition, uppercase terminals and lowercase variables
+        # are possible as well.
+        # python passes variables "by-reference" so there is no need 
+        test_for_errors(cfl)
+
+        new_start_rule(cfl)
+
+        # TODO: eliminate_useless_rules)(cfl)
+
+        eliminate_epsilons(cfl)
+
+        # TODO: eliminate_unit_productions)(cfl)
+
+        # TODO: eliminate_terminal_nonterminal(cfl)
+
+        # TODO: eliminate_nonterminal_groups(cfl)
+
+    # TODO: instead of exiting, send an invalid input report with the input_file_path
+    # then continue to the next file in the input-CFLs directory.
+    except TypeError as e:
+        print("Mismatch type detected: " + e)
+        sys.exit()
+
+    except AttributeError as e:
+        print("Invalid key in data: " + e)
+        sys.exit()
+
 
 
 def newVariable(variables):
@@ -122,69 +158,75 @@ def newVariable(variables):
         i+=1
     variables.append(var + i)
 
+
+
 def new_start_rule(cfl):
-    print()
-    print("new start rule")
-    
+    print("\nnew start rule")
+
     counter = 0
     if (cfl.start_state[0] + "_" + str(counter)) == cfl.start_state:
         counter += 1
-    
+
     new_start_string = cfl.start_state[0] + "_" + str(counter)
-    cfl.production_rules.insert(0, dict(LHS = new_start_string, RHS = list(cfl.start_state)))
+    cfl.production_rules.insert(0, dict(LHS = new_start_string,
+                                        RHS = list(cfl.start_state)))
 
     cfl.start_state = new_start_string
     cfl.variables.append(new_start_string)
-    
 
     print("created start rule")
-    print()
-    return cfl
+
+
+
+def eliminate_epsilons(cfl):
+    """
+    Remove all epsilons from the production rules, and substitute
+    Note: that if the grammar accepts the empty string there must be an epsilon in the
+    start state's production rule.
+    """
+    e_list = [] # list of variables that have an epsilon in their productions
+    for rule in cfl.production_rules:
+        for production in rule["RHS"]:
+            if "_epsilon_" in production:
+                print("\nEliminating an epsilon")
+                # removes "_epsilon_" from production of the current rule
+                production = re.sub("_epsilon_", "", production)
+                # if production has no elements remove empty item in list
+                if production in "":
+                    rule["RHS"].remove("")
+                print("Epsilon eliminated")
+                # append var to list to substitute it later
+                e_list.append(rule["LHS"], rule["RHS"])
+
+    # if a rule has a production with a var in e_list, extend the production list
+    # with the production list of the rule that contained an epsilon.
+    for rule in cfl.production_rules:
+        for production in rule["RHS"]:
+            for child_var in e_list:
+                if re.search(child_var[0], production) != None:
+                    rule["RHS"].extend(e_list[1])
+                    print("Substituted production rules that terminated to epsilon")
+    
+    print("All epsilons eliminated")
+
+
 
 def test_for_errors(cfl):
     """
-    Helper function that will be used to check if cfl is valid. If it's not valid, don't continue the program. 
-    NOTE: only checks if there is multiple start rules for now but may include other functions in future.
+    Helper function that will be used to check if cfl is valid. If it's not valid, don't
+    continue the program. 
+    NOTE: only checks if there is multiple start rules for now but may include other
+    functions in future.
     """
 
-    #check to see if start_state contains more than one element and if so, this is incorrect format and terminate program.
+    #check to see if start_state contains more than one element and if so, this is
+    # incorrect format and terminate program.
     if type(cfl.start_state) is list:
         if len(cfl.start_state) > 1:
             print("Error in CFG input")
             sys.exit()
 
-def convert_cfl(cfl):
-    """
-    Helper function for main()
-    Convert the CFL obj into Chomsky Normal Form
-    """
-    try:
-        
-        # NOTE: it's unconventional to have integers as terminals/non-terminals, but it's still possible.
-        # in addition, uppercase terminals and lowercase variables are possible aswell.
 
-        test_for_errors(cfl)
-
-        new_start_rule(cfl)
-        
-
-        # TODO: call eliminate_useless_rules)()
-
-        # TODO: call eliminate_epsilons()
-
-        # TODO: call eliminate_unit_productions)()
-
-        # TODO: call eliminate_terminal_nonterminal()
-
-        # TODO: call eliminate_nonterminal_groups()
-
-    except TypeError as e:
-        print("Mismatch type detected: " + e)
-        sys.exit()
-
-    except AttributeError as e:
-        print("Invalid key in data: " + e)
-        sys.exit()
 
 if __name__ == "__main__":
     main(os.getcwd())
