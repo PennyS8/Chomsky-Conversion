@@ -41,6 +41,12 @@ def main(current_path):
             # import JSON file as a python dictionary
             cfl = import_JSON(input_file_path)
 
+            try:
+                check_proper_form(cfl)
+            except ValueError as e:
+                print(f"Error: {e}")
+                break
+
             # TODO: remove print()'s once program is finished
             print("\ninput_CFL: ")
             print("  Variables: " + ", ".join(cfl.vars))
@@ -50,7 +56,6 @@ def main(current_path):
                 print("    " + rule["LHS"] + " -> " + ", ".join(rule["RHS"]))
             print("  Start Variable: " + cfl.start_var)
 
-            check_proper_form(cfl)
             add_new_start_rule(cfl)
             remove_useless_rules(cfl)
             remove_epsilons(cfl)
