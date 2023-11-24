@@ -2,7 +2,8 @@
     "variables": [
         "V",
         "W",
-        "S"
+        "S",
+        "U"
     ],
     "terminals": [
         "a",
@@ -22,8 +23,13 @@
             "RHS": [
                 "aW",
                 "Vb",
-                "aSb",
                 "_epsilon_"
+            ]
+        },
+        {
+            "LHS": "U",
+            "RHS": [
+                "VWV"
             ]
         },
         {

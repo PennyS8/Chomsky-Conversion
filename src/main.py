@@ -185,44 +185,26 @@ def eliminate_epsilons(cfl):
     Note: that if the grammar accepts the empty string there must be an epsilon in the
     start state's production rule.
     """
-    e_list = [] # list of variables that have an epsilon in their productions
-    for i, rule in enumerate(cfl.production_rules):
-        for j, production in enumerate(rule["RHS"]):
-            if "_epsilon_" in production:
-                production = re.sub("_epsilon_", "", production)
-                # append the variable to e_list to substitute it later
-                e_list.append(rule["LHS"])
-                # remove item from the product list
-                rule["RHS"].pop(j)
-
-    print("rules that contained epsilons:")
-    print(e_list)
+    e_list = [] # list of variables that terminate to epsilon
+    for rule in cfl.production_rules:
+        if rule["LHS"] != cfl.start_state: # exception is made for the start state
+            for i, product in enumerate(rule["RHS"]):
+                if "_epsilon_" in product:
+                    # append the variable to e_list to substitute it later
+                    e_list.append(rule["LHS"])
+                    rule["RHS"].pop(i) # remove item from the product list
 
     # if a rule has a production with a variable in e_list, then duplicate that
     # production excluding the epsilon terminating variable
-    # TODO: this does not account for products that contain multiple epsilon terminating variables
-    print("Epsilons removed, now substituting")
-    print("child_var:")
     for rule in cfl.production_rules:
-        temp = []
         for product in rule["RHS"]: # for each possible product of this rule...
             # does this product contain a variable that would terminate to epsilon
             for child_var in e_list:
                 if str(child_var) in product:
-                    #print(child_var[0])
                     # duplicate the product excluding the var in child_var
-                    new_product = copy.copy(product)
-                    #print("new_product: " + new_product)
-                    # new_product.replace(child_var[0], "_")
-                    new_product = re.sub(child_var, "", product)
-                    print(new_product)
-                    temp.append(new_product) #rule["RHS"][:0] = new_product
-        rule["RHS"][:0] = temp
-
-    # print log
-    print("All productions substituted")
-    print("Production-Rules after eliminating epsilons:")
-    print(cfl.production_rules)
+                    new_product = re.sub(child_var, "", product, count=1)
+                    if len(new_product) != 0:
+                        rule["RHS"].append(new_product)
 
 
 
