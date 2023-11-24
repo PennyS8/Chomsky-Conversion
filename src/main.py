@@ -26,9 +26,6 @@ class CFL:
         self.production_rules = production_rules
         self.start_state = start_state
 
-    def create_unique_variable():
-        pass
-
 
 
 def main(current_path):

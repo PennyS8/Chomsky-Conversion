@@ -1,7 +1,5 @@
 import string
 
-
-
 def new_var(vars):
     """
     Create a new unique variable and append it to the variables list.
