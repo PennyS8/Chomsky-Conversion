@@ -12,26 +12,23 @@
         {
             "LHS": "S",
             "RHS": [
+                "ab",
                 "V",
-                "aSb",
-                "b"
+                "aSb"
             ]
         },
         {
             "LHS": "V",
             "RHS": [
-                "aW",
-                "Wb",
+                "a",
                 "b",
-                "b"
+                "aW",
+                "Wb"
             ]
         },
         {
             "LHS": "W",
-            "RHS": [
-                "a",
-                "b"
-            ]
+            "RHS": []
         }
     ],
     "start_state": "S"
