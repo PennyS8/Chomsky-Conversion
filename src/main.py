@@ -56,7 +56,6 @@ def main(current_path):
                 print("    " + rule["LHS"] + " -> " + ", ".join(rule["RHS"]))
             print("  Start Variable: " + cfl.start_var)
 
-            check_proper_form(cfl)
             add_new_start_rule(cfl)
             remove_useless_rules(cfl)
             #remove_epsilons(cfl)
