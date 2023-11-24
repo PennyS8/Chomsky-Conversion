@@ -201,7 +201,7 @@ def eliminate_epsilons(cfl):
     # if a rule has a production with a variable in e_list, then duplicate that
     # production excluding the epsilon terminating variable
     for rule in cfl.production_rules:
-        for product in rule["RHS"]: # for each possible product of this rule...
+        for product in rule["RHS"]:
             # does this product contain a variable that would terminate to epsilon
             for et_var in e_list: # et_var (Epsilon Terminating VARiable)
                 if et_var in product:
