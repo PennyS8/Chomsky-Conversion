@@ -1,13 +1,13 @@
+from helper import new_var
+
 def add_new_start_rule(cfl):
     counter = 0
-    if (cfl.start_state[0] + "_" + str(counter)) == cfl.start_state:
+    if (cfl.start_var[0] + "_" + str(counter)) == cfl.start_var:
         counter += 1
 
-    new_start_string = cfl.start_state[0] + "_" + str(counter)
-    cfl.production_rules.insert(0, dict(LHS = new_start_string,
-                                        RHS = list(cfl.start_state)))
+    new_start_var = new_var(cfl.vars)
+    cfl.rules.insert(0, dict(LHS = new_start_var, RHS = list(cfl.start_var)))
 
-    cfl.start_state = new_start_string
-    cfl.variables.append(new_start_string)
+    cfl.start_var = new_start_var
 
     return cfl

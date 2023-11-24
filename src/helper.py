@@ -1,4 +1,5 @@
 import string
+import sys
 
 def new_var(vars):
     """
@@ -11,7 +12,7 @@ def new_var(vars):
     for letter in all_letters:
         if letter not in vars:
             vars.append(letter)
-            return
+            return letter
 
     # append ints after the letter to ensure there will be a valid var to return
     n = 0
@@ -19,10 +20,8 @@ def new_var(vars):
         new_var = f"_{n}"
         if new_var not in vars:
             vars.append(new_var)
-            return
+            return new_var
         n += 1
-
-
 
 def check_proper_form(cfl):
     """
@@ -34,7 +33,9 @@ def check_proper_form(cfl):
 
     #check to see if start_state contains more than one element and if so, this is
     # incorrect format and terminate program.
-    if type(cfl.start_state) is list:
-        if len(cfl.start_state) > 1:
+    if type(cfl.start_var) is list:
+        if len(cfl.start_var) > 1:
             print("Error in CFG input")
+            # TODO: instead of exiting, send an invalid input report with the input_file_path
+            # then continue to the next file in the input-CFLs directory.
             sys.exit()

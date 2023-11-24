@@ -9,8 +9,8 @@ def remove_epsilons(cfl):
     e_set = set() # set of variables that terminate to epsilon
     
     # find variables that terminate to epsilon
-    for rule in cfl.production_rules:
-        if rule["LHS"] != cfl.start_state: # exception is made for the start state
+    for rule in cfl.rules:
+        if rule["LHS"] != cfl.start_var: # exception is made for the start state
             for i, product in enumerate(rule["RHS"]):
                 if "_epsilon_" in product:
                     # append the variable to e_list to substitute it later
@@ -21,7 +21,7 @@ def remove_epsilons(cfl):
 
     # if a rule has a production with a variable in e_list, then duplicate that
     # production excluding the epsilon terminating variable
-    for rule in cfl.production_rules:
+    for rule in cfl.rules:
         for product in rule["RHS"]:
             # does this product contain a variable that would terminate to epsilon
             for et_var in e_list: # et_var (Epsilon Terminating VARiable)
