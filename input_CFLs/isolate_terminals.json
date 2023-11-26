@@ -3,53 +3,54 @@
         "V",
         "W",
         "S",
-        "A",
-        "B",
-        "C"
+        "X"
     ],
     "terminals": [
         "a",
-        "b"
+        "b",
+        "c"
     ],
     "rules": [
-        {
-            "LHS": "A",
-            "RHS": [
-                "S"
-            ]
-        },
         {
             "LHS": "S",
             "RHS": [
                 "_epsilon_",
                 "V",
-                "aSb"
+                "aSb",
+                "C"
+            ]
+        },
+        {
+            "LHS": "Z",
+            "RHS": [
+                "wa",
+                "a",
+                "b"
             ]
         },
         {
             "LHS": "V",
             "RHS": [
                 "aW",
-                "Wb"
+                "Wb",
+                "b",
+                "VaVV"
             ]
         },
         {
             "LHS": "W",
             "RHS": [
-                "_epsilon_"
             ]
         },
         {
-            "LHS": "B",
-            "RHS": "a"
-        },
-        {
-            "LHS": "C",
+            "LHS": "X",
             "RHS": [
-                "W",
+                "_epsilon_",
+                "a",
+                "b",
                 "C"
             ]
         }
     ],
-    "start_var": "A"
+    "start_var": "S"
 }
