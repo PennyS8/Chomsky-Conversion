@@ -1,17 +1,17 @@
 {
-    "variables": [
+    "vars": [
         "V",
         "W",
         "S",
-        "S_0"
+        "A"
     ],
     "terminals": [
         "a",
         "b"
     ],
-    "production_rules": [
+    "rules": [
         {
-            "LHS": "S_0",
+            "LHS": "A",
             "RHS": [
                 "S"
             ]
@@ -19,26 +19,27 @@
         {
             "LHS": "S",
             "RHS": [
-                "_epsilon_",
                 "V",
-                "aSb"
+                "aSb",
+                "ab"
             ]
         },
         {
             "LHS": "V",
             "RHS": [
                 "aW",
-                "Wb"
+                "Wb",
+                "a",
+                "b"
             ]
         },
         {
             "LHS": "W",
             "RHS": [
-                "_epsilon_",
                 "a",
                 "b"
             ]
         }
     ],
-    "start_state": "S_0"
+    "start_var": "A"
 }

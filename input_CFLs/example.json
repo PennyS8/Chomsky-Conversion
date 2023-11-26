@@ -1,5 +1,5 @@
 {
-    "variables": [
+    "vars": [
         "V",
         "W",
         "S"
@@ -8,7 +8,7 @@
         "a",
         "b"
     ],
-    "production_rules": [
+    "rules": [
         {
             "LHS": "S",
             "RHS": [
@@ -33,5 +33,5 @@
             ]
         }
     ],
-    "start_state": "S"
+    "start_var": "S"
 }
