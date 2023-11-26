@@ -1,34 +1,34 @@
 {
     "vars": [
         "V",
-        "W",
-        "S"
+        "S",
+        "W"
     ],
     "terminals": [
         "a",
-        "b"
+        "b",
+        "c"
     ],
     "rules": [
         {
             "LHS": "S",
             "RHS": [
-                "_epsilon_",
-                "V",
-                "aSb"
+                "ab",
+                "abbab"
             ]
         },
         {
             "LHS": "V",
             "RHS": [
                 "aW",
-                "Wb"
+                "Wb",
+                "b",
+                "VaVV"
             ]
         },
         {
             "LHS": "W",
             "RHS": [
-                "_epsilon_",
-                "a",
                 "b"
             ]
         }

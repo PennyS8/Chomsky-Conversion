@@ -3,6 +3,7 @@ import string
 def new_var(vars):
     """
     Create a new unique variable and append it to the variables list.
+    Note: new_var does not have a rule be default
     """
     # generate a list of all capitol letters
     all_letters = list(string.ascii_uppercase)
@@ -32,3 +33,23 @@ def check_proper_form(cfl):
         if len(cfl.start_var) > 1:
             raise ValueError("Input CFL is not in proper form: " +
                             "There is more than one start variable")
+
+def product_to_list(product):
+    '''
+    splits up the product by its variables/terminals and returns the list
+    '''
+    element_list = []
+    current_element = ""
+    # spilt up by start of each element is a letter
+    for char in product:
+        if char.isalpha():
+            if current_element:
+                element_list.append(current_element)
+            current_element = char
+        else:
+            current_element += char
+    # append the last element if the string ends with a symbol
+    if current_element:
+        element_list.append(current_element)
+
+    return element_list
