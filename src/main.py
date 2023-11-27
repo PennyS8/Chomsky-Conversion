@@ -6,7 +6,7 @@ from epsilon_products import remove_epsilons
 from useless_rules import remove_useless_rules
 from unit_products import remove_unit_products
 from terminal_products import isolate_terminals
-from nonterminal_groups import remove_nonterminal_groups
+from variable_groups import remove_variable_groups
 
 # helper functions:
 from JSON_dictionary import import_JSON
@@ -60,8 +60,8 @@ def main(current_path):
             #remove_useless_rules(cfl)
             #remove_epsilons(cfl)
             #remove_unit_products(cfl)
-            isolate_terminals(cfl)
-            #remove_nonterminal_groups(cfl)
+            #isolate_terminals(cfl)
+            remove_variable_groups(cfl)
 
             # TODO: remove print()'s once program is finished
             print("\noutput_CFL: ")
