@@ -21,25 +21,22 @@
         {
             "LHS": "S",
             "RHS": [
-                "B",
-                "S",
-                "C"
+                "_epsilon_",
+                "V",
+                "aSb"
             ]
         },
         {
             "LHS": "V",
             "RHS": [
                 "aW",
-                "Wb",
-                "a",
-                "b"
+                "Wb"
             ]
         },
         {
             "LHS": "W",
             "RHS": [
-                "a",
-                "b"
+                "_epsilon_"
             ]
         },
         {
