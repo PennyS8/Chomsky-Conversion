@@ -4,37 +4,36 @@
         "W",
         "S",
         "A",
-        "B",
         "C",
         "D",
+        "B",
         "E",
         "F",
-        "G",
-        "H"
+        "G"
     ],
     "terminals": [
         "a",
-        "b",
-        "c"
+        "b"
     ],
     "rules": [
         {
+            "LHS": "D",
+            "RHS": []
+        },
+        {
             "LHS": "A",
             "RHS": [
-                "EF",
-                "BC",
-                "c"
+                "FG",
+                "BE"
             ]
         },
         {
             "LHS": "S",
             "RHS": [
                 "BW",
-                "GH",
-                "EF",
-                "BC",
-                "WC",
-                "c",
+                "FG",
+                "BE",
+                "WE",
                 "a",
                 "b"
             ]
@@ -43,8 +42,7 @@
             "LHS": "V",
             "RHS": [
                 "BW",
-                "GH",
-                "WC",
+                "WE",
                 "a",
                 "b"
             ]
@@ -54,47 +52,33 @@
             "RHS": []
         },
         {
+            "LHS": "C",
+            "RHS": []
+        },
+        {
             "LHS": "B",
             "RHS": [
                 "a"
             ]
         },
         {
-            "LHS": "C",
+            "LHS": "E",
             "RHS": [
                 "b"
             ]
         },
         {
-            "LHS": "D",
-            "RHS": [
-                "c"
-            ]
-        },
-        {
-            "LHS": "E",
+            "LHS": "F",
             "RHS": [
                 "a"
             ]
         },
         {
-            "LHS": "F",
-            "RHS": [
-                "SC"
-            ]
-        },
-        {
             "LHS": "G",
             "RHS": [
-                "VB"
-            ]
-        },
-        {
-            "LHS": "H",
-            "RHS": [
-                "VV"
+                "SE"
             ]
         }
     ],
-    "start_var": "A"
+    "start_var": "D"
 }

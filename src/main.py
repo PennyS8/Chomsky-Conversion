@@ -1,7 +1,7 @@
 import os
 
 # conversion operation files:
-from start_variable import add_new_start_rule
+from start_variable import new_start_rule
 from epsilon_products import remove_epsilons
 from useless_rules import remove_useless_rules
 from unit_products import remove_unit_products
@@ -37,7 +37,7 @@ def main(current_path):
             print("File at " + input_file_path + " is not of JSON file format")
         else:
             os.chmod(input_file_path, 0o777)
-            
+
             # import JSON file as a python dictionary
             cfl = import_JSON(input_file_path)
 
@@ -48,7 +48,7 @@ def main(current_path):
                 break
 
             # TODO: remove print()'s once program is finished
-            print("\ninput_CFL: ")
+            print("\ninput_CFL: " + filename)
             print("  Variables: " + ", ".join(cfl.vars))
             print("  Terminals: " + ", ".join(cfl.terminals))
             print("  Production Rules: ")
@@ -56,15 +56,16 @@ def main(current_path):
                 print("    " + rule["LHS"] + " -> " + ", ".join(rule["RHS"]))
             print("  Start Variable: " + cfl.start_var)
 
-            add_new_start_rule(cfl)
+            new_start_rule(cfl)
             remove_useless_rules(cfl)
             remove_epsilons(cfl)
+            remove_variable_groups(cfl)
             remove_unit_products(cfl)
             isolate_terminals(cfl)
-            remove_variable_groups(cfl)
+>>>>>>>>> Temporary merge branch 2
 
             # TODO: remove print()'s once program is finished
-            print("\noutput_CFL: ")
+            print("\noutput_CFL: " + filename)
             print("  Variables: " + ", ".join(cfl.vars))
             print("  Terminals: " + ", ".join(cfl.terminals))
             print("  Production Rules: ")

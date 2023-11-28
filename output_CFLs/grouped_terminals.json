@@ -1,17 +1,16 @@
 {
     "vars": [
+        "V",
         "W",
         "S",
         "A",
         "B",
         "C",
-<<<<<<<<< Temporary merge branch 1
         "D",
         "E",
-        "F"
-=========
-        "D"
->>>>>>>>> Temporary merge branch 2
+        "F",
+        "G",
+        "H"
     ],
     "terminals": [
         "a",
@@ -22,33 +21,35 @@
         {
             "LHS": "A",
             "RHS": [
-<<<<<<<<< Temporary merge branch 1
-                "ab",
-                "AB"
-=========
-                "S"
->>>>>>>>> Temporary merge branch 2
+                "EF",
+                "BC"
             ]
         },
         {
             "LHS": "S",
             "RHS": [
-<<<<<<<<< Temporary merge branch 1
-                "aW",
-                "Wb",
-                "b",
-                "CD"
-=========
+                "BW",
+                "GH",
+                "EF",
                 "BC",
-                "BCCBC"
->>>>>>>>> Temporary merge branch 2
+                "WC",
+                "a",
+                "b"
+            ]
+        },
+        {
+            "LHS": "V",
+            "RHS": [
+                "BW",
+                "GH",
+                "WC",
+                "a",
+                "b"
             ]
         },
         {
             "LHS": "W",
-            "RHS": [
-                "b"
-            ]
+            "RHS": []
         },
         {
             "LHS": "B",
@@ -71,25 +72,25 @@
         {
             "LHS": "E",
             "RHS": [
-                "BC"
+                "a"
             ]
         },
         {
             "LHS": "F",
             "RHS": [
-                "GH"
+                "SC"
             ]
         },
         {
             "LHS": "G",
             "RHS": [
-                "b"
+                "VB"
             ]
         },
         {
             "LHS": "H",
             "RHS": [
-                "BC"
+                "VV"
             ]
         }
     ],
