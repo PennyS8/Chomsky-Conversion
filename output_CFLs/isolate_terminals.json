@@ -5,24 +5,43 @@
         "A",
         "B",
         "C",
+<<<<<<<<< Temporary merge branch 1
         "D",
         "E",
-        "F",
-        "H"
+        "F"
+=========
+        "D"
+>>>>>>>>> Temporary merge branch 2
+    ],
+    "terminals": [
+        "a",
+        "b",
+        "c"
     ],
     "rules": [
         {
             "LHS": "A",
             "RHS": [
-                "EF",
-                "BC"
+<<<<<<<<< Temporary merge branch 1
+                "ab",
+                "AB"
+=========
+                "S"
+>>>>>>>>> Temporary merge branch 2
             ]
         },
         {
             "LHS": "S",
             "RHS": [
-                "EF",
-                "BC"
+<<<<<<<<< Temporary merge branch 1
+                "aW",
+                "Wb",
+                "b",
+                "CD"
+=========
+                "BC",
+                "BCCBC"
+>>>>>>>>> Temporary merge branch 2
             ]
         },
         {

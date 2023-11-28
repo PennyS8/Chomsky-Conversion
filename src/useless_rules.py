@@ -34,7 +34,7 @@ def remove_useless_rules(cfl):
 
     visited = [] # List to keep track of visited nodes.
     queue = [] # Initialize a queue
- 
+
     bfs(visited, test, cfl.start_var, queue)
 
     checkReachableVariable(cfl, visited)

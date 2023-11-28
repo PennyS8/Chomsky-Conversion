@@ -59,9 +59,10 @@ def main(current_path):
             new_start_rule(cfl)
             remove_useless_rules(cfl)
             remove_epsilons(cfl)
-            isolate_terminals(cfl)
             remove_variable_groups(cfl)
             remove_unit_products(cfl)
+            isolate_terminals(cfl)
+>>>>>>>>> Temporary merge branch 2
 
             # TODO: remove print()'s once program is finished
             print("\noutput_CFL: " + filename)
