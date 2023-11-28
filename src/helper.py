@@ -44,11 +44,11 @@ def check_proper_form(cfl):
 
     # Check rule format
     for rule in cfl.rules:
-        if not isinstance(rule, dict) or \
-            "LHS" not in rule or \
-            "RHS" not in rule or \
-            not isinstance(rule["LHS"], str) or \
-            not isinstance(rule["RHS"], list):
+        if ("LHS" not in rule or
+            "RHS" not in rule or
+            not isinstance(rule, dict) or
+            not isinstance(rule["LHS"], str) or
+            not isinstance(rule["RHS"], list)):
             raise ValueError("Input CFL is not in proper form: " + 
                             "Incorrect rule format")
 
@@ -57,23 +57,29 @@ def check_proper_form(cfl):
         raise ValueError("Input CFL is not in proper form: " + 
                         "Start variable should have exactly one element")
 
+    # Check if vars, terminals, and rules are not empty
+    if not cfl.vars or not cfl.terminals or not cfl.rules:
+        raise ValueError("Input CFL is not in proper form: Empty lists")
+
     # Check if variables and terminals lists are comprehensive
     used_vars = set()
     used_terminals = set()
 
     for rule in cfl.rules:
         used_vars.add(rule["LHS"])
-        for symbol in rule["RHS"]:
-            if symbol.isalpha():
-                used_vars.add(symbol)
-            else:
-                used_terminals.add(symbol)
+        for product in rule["RHS"]:
+            symbol_list = product_to_list(product)
+            for symbol in symbol_list:
+                if symbol in cfl.vars:
+                    used_vars.add(symbol)
+                else:
+                    used_terminals.add(symbol)
 
-    if set(cfl.vars) != used_vars:
+    if not set(used_vars).issubset(set(cfl.vars)):
         raise ValueError("Input CFL is not in proper form: " + 
                         "Variables list is not comprehensive")
 
-    if set(cfl.terminals) != used_terminals:
+    if not set(used_terminals).issubset(set(cfl.terminals)):
         raise ValueError("Input CFL is not in proper form: " + 
                         "Terminals list is not comprehensive")
 
@@ -85,6 +91,8 @@ def check_proper_form(cfl):
     if len(cfl.terminals) != len(set(cfl.terminals)):
         raise ValueError("Input CFL is not in proper form: " + 
                         "Duplicate elements in the terminals list")
+        
+    used_vars = set()
 
 def product_to_list(product):
     '''
