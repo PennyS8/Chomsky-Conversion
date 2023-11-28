@@ -21,29 +21,29 @@
         {
             "LHS": "A",
             "RHS": [
-                "BC",
-                "EF"
+                "EF",
+                "BC"
             ]
         },
         {
             "LHS": "S",
             "RHS": [
+                "WC",
                 "EF",
-                "b",
-                "GH",
-                "BW",
-                "BC",
                 "a",
-                "WC"
+                "BC",
+                "BW",
+                "b",
+                "GH"
             ]
         },
         {
             "LHS": "V",
             "RHS": [
                 "WC",
-                "b",
-                "BW",
                 "a",
+                "BW",
+                "b",
                 "GH"
             ]
         },
