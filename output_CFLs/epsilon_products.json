@@ -12,8 +12,8 @@
         {
             "LHS": "S",
             "RHS": [
-                "a",
-                "_epsilon_"
+                "_epsilon_",
+                "a"
             ]
         },
         {

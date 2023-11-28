@@ -3,7 +3,7 @@
     "terminals": ["a", "b"],
     "rules": [
         {"LHS": "S", "RHS": ["A"]},
-        {"LHS": "A", "RHS": ["B"]},
+        {"LHS": "A", "RHS": ["ab", "B"]},
         {"LHS": "B", "RHS": ["a", "b"]}
     ],
     "start_var": "S"
