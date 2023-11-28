@@ -2,7 +2,16 @@
     "vars": [
         "S",
         "A",
-        "B"
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K"
     ],
     "terminals": [
         "a",
@@ -12,24 +21,78 @@
     ],
     "rules": [
         {
+            "LHS": "C",
+            "RHS": [
+                "S"
+            ]
+        },
+        {
             "LHS": "S",
             "RHS": [
-                "ABcd"
+                "DE"
             ]
         },
         {
             "LHS": "A",
             "RHS": [
-                "aBc"
+                "FG"
             ]
         },
         {
             "LHS": "B",
             "RHS": [
-                "Ad",
-                "bc"
+                "IJ",
+                "AK"
+            ]
+        },
+        {
+            "LHS": "D",
+            "RHS": [
+                "AB"
+            ]
+        },
+        {
+            "LHS": "E",
+            "RHS": [
+                "JK"
+            ]
+        },
+        {
+            "LHS": "F",
+            "RHS": [
+                "a"
+            ]
+        },
+        {
+            "LHS": "G",
+            "RHS": [
+                "BJ"
+            ]
+        },
+        {
+            "LHS": "H",
+            "RHS": [
+                "a"
+            ]
+        },
+        {
+            "LHS": "I",
+            "RHS": [
+                "b"
+            ]
+        },
+        {
+            "LHS": "J",
+            "RHS": [
+                "c"
+            ]
+        },
+        {
+            "LHS": "K",
+            "RHS": [
+                "d"
             ]
         }
     ],
-    "start_var": "S"
+    "start_var": "C"
 }

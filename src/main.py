@@ -44,16 +44,16 @@ def main(current_path):
             try:
                 check_proper_form(cfl) # not whole encompasing
             except ValueError as e:
-                print(f"Error: {e}")
+                print(f"Error in file {filename}: {e}")
                 break
 
             # the primary conversion steps to CNF as functions:
-            # new_start_rule(cfl)
-            # remove_useless_rules(cfl)
-            # remove_epsilons(cfl) # doesn't account for > 3 vars
-            # remove_variable_groups(cfl)
-            remove_unit_products(cfl) # contains fatal bug
-            # isolate_terminals(cfl)
+            new_start_rule(cfl)
+            remove_useless_rules(cfl)
+            remove_epsilons(cfl) # doesn't account for > 3 vars
+            remove_variable_groups(cfl)
+            # remove_unit_products(cfl) # contains fatal bug
+            isolate_terminals(cfl)
 
             # export python dictionary as a JSON file
             export_JSON(cfl, output_file_path)

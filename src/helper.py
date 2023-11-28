@@ -27,12 +27,64 @@ def check_proper_form(cfl):
     '''
     Check if the input CFL is in proper CFL form, if not raise an exception.
     '''
-    # TODO: update this fn with more checks
-    # Check start_state contains no more than one element
-    if type(cfl.start_var) is list:
-        if len(cfl.start_var) > 1:
-            raise ValueError("Input CFL is not in proper form: " +
-                            "There is more than one start variable")
+    # Check if all required keys are present
+    required_keys = ["vars", "terminals", "rules", "start_var"]
+    for key in required_keys:
+        if key not in cfl.__dict__:
+            raise ValueError(f"Input CFL is not in proper form: " + 
+                        "Missing key '{key}'")
+
+    # Check variable types
+    if (not isinstance(cfl.vars, list) or
+        not isinstance(cfl.terminals, list) or
+        not isinstance(cfl.rules, list) or
+        not isinstance(cfl.start_var, str)):
+        raise ValueError("Input CFL is not in proper form: " + 
+                        "Incorrect variable types")
+
+    # Check rule format
+    for rule in cfl.rules:
+        if not isinstance(rule, dict) or \
+            "LHS" not in rule or \
+            "RHS" not in rule or \
+            not isinstance(rule["LHS"], str) or \
+            not isinstance(rule["RHS"], list):
+            raise ValueError("Input CFL is not in proper form: " + 
+                            "Incorrect rule format")
+
+    # Check start variable format
+    if len(cfl.start_var) != 1:
+        raise ValueError("Input CFL is not in proper form: " + 
+                        "Start variable should have exactly one element")
+
+    # Check if variables and terminals lists are comprehensive
+    used_vars = set()
+    used_terminals = set()
+
+    for rule in cfl.rules:
+        used_vars.add(rule["LHS"])
+        for symbol in rule["RHS"]:
+            if symbol.isalpha():
+                used_vars.add(symbol)
+            else:
+                used_terminals.add(symbol)
+
+    if set(cfl.vars) != used_vars:
+        raise ValueError("Input CFL is not in proper form: " + 
+                        "Variables list is not comprehensive")
+
+    if set(cfl.terminals) != used_terminals:
+        raise ValueError("Input CFL is not in proper form: " + 
+                        "Terminals list is not comprehensive")
+
+    # Check for duplicate elements in variables and terminals lists
+    if len(cfl.vars) != len(set(cfl.vars)):
+        raise ValueError("Input CFL is not in proper form: " + 
+                        "Duplicate elements in the variables list")
+
+    if len(cfl.terminals) != len(set(cfl.terminals)):
+        raise ValueError("Input CFL is not in proper form: " + 
+                        "Duplicate elements in the terminals list")
 
 def product_to_list(product):
     '''
