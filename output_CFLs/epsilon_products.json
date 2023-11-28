@@ -2,13 +2,22 @@
     "vars": [
         "S",
         "A",
-        "B"
+        "B",
+        "C",
+        "D",
+        "E"
     ],
     "terminals": [
         "a",
         "b"
     ],
     "rules": [
+        {
+            "LHS": "C",
+            "RHS": [
+                "S"
+            ]
+        },
         {
             "LHS": "S",
             "RHS": [
@@ -22,7 +31,19 @@
             "RHS": [
                 "a"
             ]
+        },
+        {
+            "LHS": "D",
+            "RHS": [
+                "a"
+            ]
+        },
+        {
+            "LHS": "E",
+            "RHS": [
+                "b"
+            ]
         }
     ],
-    "start_var": "S"
+    "start_var": "C"
 }

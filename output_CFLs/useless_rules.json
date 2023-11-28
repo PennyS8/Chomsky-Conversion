@@ -3,13 +3,21 @@
         "S",
         "A",
         "B",
-        "C"
+        "D",
+        "C",
+        "E"
     ],
     "terminals": [
         "a",
         "b"
     ],
     "rules": [
+        {
+            "LHS": "D",
+            "RHS": [
+                "S"
+            ]
+        },
         {
             "LHS": "S",
             "RHS": [
@@ -32,10 +40,15 @@
         {
             "LHS": "C",
             "RHS": [
-                "S",
-                "A"
+                "a"
+            ]
+        },
+        {
+            "LHS": "E",
+            "RHS": [
+                "b"
             ]
         }
     ],
-    "start_var": "S"
+    "start_var": "D"
 }
