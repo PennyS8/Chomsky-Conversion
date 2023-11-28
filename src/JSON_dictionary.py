@@ -47,8 +47,8 @@ def export_JSON(output_cfl, output_file_path):
     file_name = os.path.basename(output_file_path)
 
     if os.path.exists(output_file_path):
-        print("\nWarning!: Output file " + file_name +
-            " already existed in 'output_CFLs' and is now overwritten")
+        sys.stdout.write("\nWarning!: Output file " + file_name +
+            " was overwritten")
 
     with open(output_file_path, "w") as file:
         json.dump(output_cfl.__dict__, file, indent=4)
