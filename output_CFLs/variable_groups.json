@@ -1,14 +1,16 @@
 {
     "vars": [
         "V",
-        "S",
         "W",
+        "S",
         "A",
         "B",
         "C",
         "D",
         "E",
-        "F"
+        "F",
+        "G",
+        "H"
     ],
     "terminals": [
         "a",
@@ -17,63 +19,82 @@
     ],
     "rules": [
         {
+            "LHS": "A",
+            "RHS": [
+                "BC",
+                "EF",
+                "c"
+            ]
+        },
+        {
             "LHS": "S",
             "RHS": [
-                "ab",
-                "AB"
+                "EF",
+                "c",
+                "b",
+                "GH",
+                "BW",
+                "BC",
+                "a",
+                "WC"
             ]
         },
         {
             "LHS": "V",
             "RHS": [
-                "aW",
-                "Wb",
+                "WC",
                 "b",
-                "CD"
+                "BW",
+                "a",
+                "GH"
             ]
         },
         {
             "LHS": "W",
-            "RHS": [
-                "b"
-            ]
-        },
-        {
-            "LHS": "A",
-            "RHS": [
-                "ab"
-            ]
+            "RHS": []
         },
         {
             "LHS": "B",
             "RHS": [
-                "EF"
+                "a"
             ]
         },
         {
             "LHS": "C",
             "RHS": [
-                "Va"
+                "b"
             ]
         },
         {
             "LHS": "D",
             "RHS": [
-                "VV"
+                "c"
             ]
         },
         {
             "LHS": "E",
             "RHS": [
-                "b"
+                "a"
             ]
         },
         {
             "LHS": "F",
             "RHS": [
-                "ab"
+                "SC"
+            ]
+        },
+        {
+            "LHS": "G",
+            "RHS": [
+                "VB"
+            ]
+        },
+        {
+            "LHS": "H",
+            "RHS": [
+                "VV"
             ]
         }
     ],
-    "start_var": "S"
+    "start_var": "A"
 }

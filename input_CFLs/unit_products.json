@@ -6,15 +6,14 @@
     ],
     "terminals": [
         "a",
-        "b",
-        "c"
+        "b"
     ],
     "rules": [
         {
             "LHS": "S",
             "RHS": [
-                "ab",
-                "abbab"
+                "V",
+                "aSb"
             ]
         },
         {
@@ -22,13 +21,14 @@
             "RHS": [
                 "aW",
                 "Wb",
-                "b",
-                "VaVV"
+                "a",
+                "b"
             ]
         },
         {
             "LHS": "W",
             "RHS": [
+                "W",
                 "b"
             ]
         }
