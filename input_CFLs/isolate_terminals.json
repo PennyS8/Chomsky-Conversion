@@ -1,0 +1,37 @@
+{
+    "vars": [
+        "V",
+        "S",
+        "W"
+    ],
+    "terminals": [
+        "a",
+        "b",
+        "c"
+    ],
+    "rules": [
+        {
+            "LHS": "S",
+            "RHS": [
+                "ab",
+                "abbab"
+            ]
+        },
+        {
+            "LHS": "V",
+            "RHS": [
+                "aW",
+                "Wb",
+                "b",
+                "VaVV"
+            ]
+        },
+        {
+            "LHS": "W",
+            "RHS": [
+                "b"
+            ]
+        }
+    ],
+    "start_var": "S"
+}

@@ -42,14 +42,13 @@ def import_JSON(input_file_path):
 def export_JSON(output_cfl, output_file_path):
     """
     Creates a JSON file from CFL object
-    Note: it will not create a file if the file already exists,
-    but instead will overwrite existing file with that file name.
+    Note: will overwrite existing file if the filename already exists,
     """
     file_name = os.path.basename(output_file_path)
 
     if os.path.exists(output_file_path):
         print("\nWarning!: Output file " + file_name +
-                " already existed in folder 'output_CFLs' and is now overwritten\n")
+            " already existed in 'output_CFLs' and is now overwritten\n")
 
     with open(output_file_path, "w") as file:
         json.dump(output_cfl.__dict__, file, indent=4)

@@ -1,9 +1,9 @@
 import string
-import sys
 
 def new_var(vars):
     """
     Create a new unique variable and append it to the variables list.
+    Note: new_var does not have a rule be default
     """
     # generate a list of all capitol letters
     all_letters = list(string.ascii_uppercase)
@@ -14,7 +14,7 @@ def new_var(vars):
             vars.append(letter)
             return letter
 
-    # append ints after the letter to ensure there will be a valid var to return
+    # append ints if we run out of letters
     n = 0
     while True:
         new_var = f"_{n}"
@@ -24,18 +24,32 @@ def new_var(vars):
         n += 1
 
 def check_proper_form(cfl):
-    """
-    Helper function that will be used to check if cfl is valid. If it's not valid, don't
-    continue the program. 
-    NOTE: only checks if there is multiple start rules for now but may include other
-    functions in future.
-    """
-
-    #check to see if start_state contains more than one element and if so, this is
-    # incorrect format and terminate program.
+    '''
+    Check if the input CFL is in proper CFL form, if not raise an exception.
+    '''
+    # TODO: update this fn with more checks
+    # Check start_state contains no more than one element
     if type(cfl.start_var) is list:
         if len(cfl.start_var) > 1:
-            print("Error in CFG input")
-            # TODO: instead of exiting, send an invalid input report with the input_file_path
-            # then continue to the next file in the input-CFLs directory.
-            sys.exit()
+            raise ValueError("Input CFL is not in proper form: " +
+                            "There is more than one start variable")
+
+def product_to_list(product):
+    '''
+    splits up the product by its variables/terminals and returns the list
+    '''
+    element_list = []
+    current_element = ""
+    # spilt up by start of each element is a letter
+    for char in product:
+        if char.isalpha():
+            if current_element:
+                element_list.append(current_element)
+            current_element = char
+        else:
+            current_element += char
+    # append the last element if the string ends with a symbol
+    if current_element:
+        element_list.append(current_element)
+
+    return element_list
