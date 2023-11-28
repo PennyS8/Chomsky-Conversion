@@ -56,11 +56,20 @@ def main(current_path):
                 print("    " + rule["LHS"] + " -> " + ", ".join(rule["RHS"]))
             print("  Start Variable: " + cfl.start_var)
 
+<<<<<<< HEAD
             #add_new_start_rule(cfl)
             #remove_useless_rules(cfl)
             #remove_epsilons(cfl)
             #remove_unit_products(cfl)
             isolate_terminals(cfl)
+=======
+            check_proper_form(cfl)
+            add_new_start_rule(cfl)
+            remove_useless_rules(cfl)
+            #remove_epsilons(cfl)
+            #remove_unit_products(cfl)
+            #isolate_terminals(cfl)
+>>>>>>> 11788a2a2a88370af21fe53f991c333e9ea3eb9c
             #remove_nonterminal_groups(cfl)
 
             # TODO: remove print()'s once program is finished
