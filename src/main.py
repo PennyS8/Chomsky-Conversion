@@ -58,10 +58,10 @@ def main(current_path):
 
             add_new_start_rule(cfl)
             remove_useless_rules(cfl)
-            #remove_epsilons(cfl)
-            #remove_unit_products(cfl)
-            #isolate_terminals(cfl)
-            #remove_nonterminal_groups(cfl)
+            remove_epsilons(cfl)
+            remove_unit_products(cfl)
+            isolate_terminals(cfl)
+            remove_nonterminal_groups(cfl)
 
             # TODO: remove print()'s once program is finished
             print("\noutput_CFL: ")
