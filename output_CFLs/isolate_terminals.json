@@ -1,14 +1,11 @@
 {
     "vars": [
-        "V",
         "S",
         "W",
         "A",
         "B",
         "C",
-        "D",
-        "E",
-        "F"
+        "D"
     ],
     "terminals": [
         "a",
@@ -17,19 +14,16 @@
     ],
     "rules": [
         {
-            "LHS": "S",
+            "LHS": "A",
             "RHS": [
-                "ab",
-                "AB"
+                "S"
             ]
         },
         {
-            "LHS": "V",
+            "LHS": "S",
             "RHS": [
-                "aW",
-                "Wb",
-                "b",
-                "CD"
+                "BC",
+                "BCCBC"
             ]
         },
         {
@@ -39,19 +33,19 @@
             ]
         },
         {
-            "LHS": "A",
+            "LHS": "B",
             "RHS": [
                 "ab"
             ]
         },
         {
-            "LHS": "B",
+            "LHS": "C",
             "RHS": [
                 "EF"
             ]
         },
         {
-            "LHS": "C",
+            "LHS": "D",
             "RHS": [
                 "Va"
             ]
@@ -75,5 +69,5 @@
             ]
         }
     ],
-    "start_var": "S"
+    "start_var": "A"
 }
