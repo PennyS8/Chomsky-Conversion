@@ -47,31 +47,13 @@ def main(current_path):
                 print(f"Error: {e}")
                 break
 
-            # TODO: remove print()'s once program is finished
-            print("\ninput_CFL: " + filename)
-            print("  Variables: " + ", ".join(cfl.vars))
-            print("  Terminals: " + ", ".join(cfl.terminals))
-            print("  Production Rules: ")
-            for rule in cfl.rules:
-                print("    " + rule["LHS"] + " -> " + ", ".join(rule["RHS"]))
-            print("  Start Variable: " + cfl.start_var)
-
+            # the primary conversion steps to CNF as functions:
             new_start_rule(cfl)
             remove_useless_rules(cfl)
             remove_epsilons(cfl)
             remove_variable_groups(cfl)
-            remove_unit_products(cfl)
+            # remove_unit_products(cfl)
             isolate_terminals(cfl)
->>>>>>>>> Temporary merge branch 2
-
-            # TODO: remove print()'s once program is finished
-            print("\noutput_CFL: " + filename)
-            print("  Variables: " + ", ".join(cfl.vars))
-            print("  Terminals: " + ", ".join(cfl.terminals))
-            print("  Production Rules: ")
-            for rule in cfl.rules:
-                print("    " + rule["LHS"] + " -> " + ", ".join(rule["RHS"]))
-            print("  Start Variable: " + cfl.start_var)
 
             # export python dictionary as a JSON file
             export_JSON(cfl, output_file_path)
