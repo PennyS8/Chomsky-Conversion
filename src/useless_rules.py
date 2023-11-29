@@ -1,24 +1,13 @@
 import string
 from helper import product_to_list
 
-"""
-Elimating useless variables has two parts.
-1) Removing variables that don't generate anything (not derivable from
-        Start state)
-2) Removing variables that are unreachable from start symbol.
-"""
-
 def remove_useless_rules(cfl):
     """
-    Function that iterates through each production rule index,
-    grab value in RHS and see if it is part of the variable set.
-    If it's not, delete that index.
-
-    This is the function called by main.py that is used to check
-    all parts of production rule to detect useless variables.
+    Removes non-generating and non-reachable rules from the given
+    context-free grammar.
 
     Args:
-        cfl (json dictionary): dictionary of 4 tuple cfl
+    - cfl (CFG): The context-free grammar to process.
     """
 
     for rule_dict in cfl.rules:

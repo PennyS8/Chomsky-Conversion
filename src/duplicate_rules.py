@@ -1,6 +1,9 @@
 def remove_duplicate_rules(cfl):
     """
     Remove duplicate rules (rules with the same LHS and RHS) from the CFL.
+    
+    Args:
+        cfl (json dictionary): dictionary of 4 tuple cfl
     """
     unique_rules = set()
 

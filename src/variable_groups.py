@@ -5,13 +5,14 @@ def remove_variable_groups(cfl):
     '''
     Find products that are length greater than 2 and cut then substitute each
     half for a new variable & production rule until they are length 2 or less.
+
     NOTE: that we are appending to the list we are iterating over, this is
         effectively recursively breaking down the size of each production by 2
         each time unntil the length of the production is too small (len() <= 2)
-        and is caught by the edge case
+        and is caught by the edge case checker.
 
-        Args:
-            cfl (json dictionary): dictionary of 4 tuple cfl
+    Args:
+        cfl (json dictionary): dictionary of 4 tuple cfl
     '''
     # find each instance of variable groups in rule productions
     for rule in cfl.rules:
