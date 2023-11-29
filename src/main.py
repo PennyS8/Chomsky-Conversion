@@ -53,7 +53,7 @@ def main(current_path):
             except ValueError as e:
                 print(f"Error in file {filename}: {e}")
                 break
-            
+
             # the primary conversion steps to CNF as functions:
             new_start_rule(cfl)
             remove_useless_rules(cfl)
@@ -62,9 +62,6 @@ def main(current_path):
             isolate_terminals(cfl)
             remove_variable_groups(cfl)
             remove_duplicate_rules(cfl)
-
-            # remove_useless_rules(cfl)
-            # remove_useless_rules(cfl)
 
             # export python dictionary as a JSON file
             export_JSON(cfl, output_file_path)
