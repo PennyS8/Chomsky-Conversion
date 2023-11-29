@@ -2,9 +2,9 @@
     "vars": ["S", "A", "B"],
     "terminals": ["a", "b"],
     "rules": [
-        {"LHS": "S", "RHS": ["A", "B"]},
+        {"LHS": "S", "RHS": ["AB", "_epsilon_"]},
         {"LHS": "A", "RHS": ["a"]},
-        {"LHS": "B", "RHS": ["_epsilon_"]}
+        {"LHS": "B", "RHS": ["_epsilon_", "b"]}
     ],
     "start_var": "S"
 }

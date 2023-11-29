@@ -2,7 +2,10 @@
     "vars": [
         "S",
         "A",
-        "B"
+        "B",
+        "C",
+        "D",
+        "E"
     ],
     "terminals": [
         "a",
@@ -10,10 +13,17 @@
     ],
     "rules": [
         {
+            "LHS": "C",
+            "RHS": [
+                "a",
+                "AB"
+            ]
+        },
+        {
             "LHS": "S",
             "RHS": [
-                "_epsilon_",
-                "a"
+                "a",
+                "AB"
             ]
         },
         {
@@ -25,9 +35,21 @@
         {
             "LHS": "B",
             "RHS": [
-                "_epsilon_"
+                "b"
+            ]
+        },
+        {
+            "LHS": "D",
+            "RHS": [
+                "a"
+            ]
+        },
+        {
+            "LHS": "E",
+            "RHS": [
+                "b"
             ]
         }
     ],
-    "start_var": "S"
+    "start_var": "C"
 }
