@@ -12,6 +12,7 @@ from variable_groups import remove_variable_groups
 from JSON_dictionary import import_JSON
 from JSON_dictionary import export_JSON
 from helper import check_proper_form
+from helper import printCFL
 
 def main(current_path):
     """"
@@ -30,33 +31,38 @@ def main(current_path):
 
     # loop through input_CFLs directory and convert the CFG's to CNF
     for filename in os.listdir(current_input_dir):
-        output_file_path = os.path.join(current_output_dir, filename)
-        input_file_path = os.path.join(current_input_dir, filename)
+        if filename == "epsilon_products.json":
+            output_file_path = os.path.join(current_output_dir, filename)
+            input_file_path = os.path.join(current_input_dir, filename)
 
-        if not os.path.isfile(input_file_path):
-            print("File at " + input_file_path + " is not of JSON file format")
-        else:
-            os.chmod(input_file_path, 0o777)
+            if not os.path.isfile(input_file_path):
+                print("File at " + input_file_path + " is not of JSON file format")
+            else:
+                os.chmod(input_file_path, 0o777)
 
-            # import JSON file as a python dictionary
-            cfl = import_JSON(input_file_path)
+                # import JSON file as a python dictionary
+                cfl = import_JSON(input_file_path)
 
-            try:
-                check_proper_form(cfl) # not whole encompasing
-            except ValueError as e:
-                print(f"Error in file {filename}: {e}")
-                break
+                try:
+                    check_proper_form(cfl) # not whole encompasing
+                except ValueError as e:
+                    print(f"Error in file {filename}: {e}")
+                    break
+                
+                printCFL(cfl, "input_CFL")
+                
+                # the primary conversion steps to CNF as functions:
+                new_start_rule(cfl)
+                remove_useless_rules(cfl)
+                remove_epsilons(cfl) # doesn't account for > 3 vars
+                #remove_variable_groups(cfl)
+                # remove_unit_products(cfl) # contains fatal bug
+                #isolate_terminals(cfl)
 
-            # the primary conversion steps to CNF as functions:
-            new_start_rule(cfl)
-            remove_useless_rules(cfl)
-            remove_epsilons(cfl) # doesn't account for > 3 vars
-            remove_variable_groups(cfl)
-            # remove_unit_products(cfl) # contains fatal bug
-            isolate_terminals(cfl)
-
-            # export python dictionary as a JSON file
-            export_JSON(cfl, output_file_path)
+                # export python dictionary as a JSON file
+                printCFL(cfl, "output_CFL")
+                
+                export_JSON(cfl, output_file_path)
 
 if __name__ == "__main__":
     main(os.getcwd())

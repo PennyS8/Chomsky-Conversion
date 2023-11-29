@@ -134,9 +134,10 @@ def checkReachableVariable(cfl, visited):
             # 
             # Ex: if W -> (blank) and it's still a reachable production rule and part of variable list
             # then W -> _epsilon_       
-            if left_rule in visited and len(rule_dict['RHS']) == 0: 
-                index = cfl.rules.index(rule_dict)
-                cfl.rules[index]["RHS"] = "_epsilon_".split()
+            # if left_rule in visited and len(rule_dict['RHS']) == 0:
+            #     print(left_rule) 
+            #     index = cfl.rules.index(rule_dict)
+            #     cfl.rules[index]["RHS"] = "_epsilon_".split()
     
 def addAllVar(RHS_elements):
     """
