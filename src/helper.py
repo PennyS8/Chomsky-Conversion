@@ -106,6 +106,8 @@ def product_to_list(product):
     Args:
         product (string): string of an element contained
         in RHS of particular rule
+
+    Returns: a list of terminals and variables that are in the string
     """
 
     element_list = []

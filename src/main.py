@@ -7,7 +7,7 @@ from useless_rules import remove_useless_rules
 from unit_products import remove_unit_products
 from terminal_products import isolate_terminals
 from variable_groups import remove_variable_groups
-from duplicate_rules import remove_duplicate_rules
+from simplify_cfl import simplify_rules
 
 # helper functions:
 from JSON_dictionary import import_JSON
@@ -62,7 +62,7 @@ def main(current_path):
             remove_variable_groups(cfl)
             
             # additional operation to simplify output
-            remove_duplicate_rules(cfl)
+            simplify_rules(cfl)
 
             # export python dictionary as a JSON file
             export_JSON(cfl, output_file_path)
