@@ -2,9 +2,13 @@ from helper import new_var
 from helper import product_to_list
 
 def isolate_terminals(cfl):
-    '''
-    Sub out terminals for a new variable that terminates only to that terminal
-    '''
+    """
+    Function that sub out terminals for a new variable that terminates only to that terminal
+
+    Args:
+        cfl (json dictionary): dictionary of 4 tuple cfl
+    """
+
     # creates dict of terminals w/ a var that terminates only to that terminal
     tt_dict = {} # the terminal terminating dictionary (python hashmap)
 
@@ -19,6 +23,7 @@ def isolate_terminals(cfl):
     # substitute every terminal in rule["RHS"] for its tt_dict variable
     for rule in cfl.rules:
         for i, product in enumerate(rule["RHS"]):
+            
             # splits up the product into a list by its variable/terminals
             product_list = product_to_list(product)
 

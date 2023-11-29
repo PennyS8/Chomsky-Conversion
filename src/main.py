@@ -15,11 +15,17 @@ from JSON_dictionary import export_JSON
 from helper import check_proper_form
 
 def main(current_path):
-    """"
+    """
     Main function will convert all CFL files within the input_CFLs directory
     Then store the output into the output_CFLs directory with the same file
     name as the input CFL file
+
+    Args:
+        current_path (string): filepath where program is running from. Important
+                               when trying to access other files in folder and needing
+                               to reference a location.
     """
+
     input_dir = "input_CFLs"
     output_dir = "output_CFLs"
 
@@ -47,7 +53,7 @@ def main(current_path):
             except ValueError as e:
                 print(f"Error in file {filename}: {e}")
                 break
-
+            
             # the primary conversion steps to CNF as functions:
             new_start_rule(cfl)
             remove_epsilons(cfl)

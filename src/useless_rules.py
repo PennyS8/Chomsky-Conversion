@@ -20,7 +20,6 @@ def remove_useless_rules(cfl):
                 if symbol not in cfl.vars and symbol not in cfl.terminals:
                     rule_dict.remove(right_rule)
 
-
     # Function that looks at all the variables from LHS, check if variable
     # are part of variable set, and if not remove.
     for rule_dict in cfl.rules:
