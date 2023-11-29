@@ -15,24 +15,24 @@
         {
             "LHS": "C",
             "RHS": [
+                "DB",
                 "DE",
-                "BD",
-                "DB"
+                "BD"
             ]
         },
         {
             "LHS": "S",
             "RHS": [
+                "DB",
                 "DE",
-                "BD",
-                "DB"
+                "BD"
             ]
         },
         {
             "LHS": "A",
             "RHS": [
-                "DE",
-                "DB"
+                "DB",
+                "DE"
             ]
         },
         {
