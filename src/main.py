@@ -60,6 +60,8 @@ def main(current_path):
             remove_unit_products(cfl)
             isolate_terminals(cfl)
             remove_variable_groups(cfl)
+            
+            # additional simplification
             remove_duplicate_rules(cfl)
 
             # export python dictionary as a JSON file
