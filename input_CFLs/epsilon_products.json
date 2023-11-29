@@ -2,7 +2,7 @@
     "vars": ["S", "A", "B", "C", "D"],
     "terminals": ["a", "b", "c", "d"],
     "rules": [
-        {"LHS": "S", "RHS": ["A", "B", "C", "CD"]},
+        {"LHS": "S", "RHS": ["A", "B", "C", "ABCD"]},
         {"LHS": "A", "RHS": ["aBa", ""]},
         {"LHS": "B", "RHS": [""]},
         {"LHS": "C", "RHS": ["cAB", "CA", ""]},
