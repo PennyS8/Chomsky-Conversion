@@ -3,7 +3,7 @@ import string
 """
 Elimating useless variables has two parts.
 1) Removing variables that don't generate anything (not derivable from Start state)
-2) Removing varialbes that are unreachable from start symbol.
+2) Removing variables that are unreachable from start symbol.
 """
 
 def remove_useless_rules(cfl):
