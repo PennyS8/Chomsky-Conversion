@@ -5,7 +5,6 @@ Elimating useless variables has two parts.
 1) Removing variables that don't generate anything (not derivable from Start state)
 2) Removing variables that are unreachable from start symbol.
 """
-
 def remove_useless_rules(cfl):
     """
     Function that iterates through each production rule index,
@@ -18,10 +17,8 @@ def remove_useless_rules(cfl):
     Args:
         cfl (json dictionary): dictionary of 4 tuple cfl
     """
-
     for rule_dict in cfl.rules:
         for right_rule in rule_dict["RHS"]:
-
             # we will assume all variables are of length 1 for now and
             # check if it's upper case as that's what variables are usually.
             if len(right_rule) == 1 and right_rule in string.ascii_uppercase:
@@ -38,7 +35,6 @@ def remove_useless_rules(cfl):
     bfs(visited, test, cfl.start_var, queue)
 
     checkReachableVariable(cfl, visited)
-
 
 def bfs(visited, graph, node, queue):
     """
@@ -63,7 +59,6 @@ def bfs(visited, graph, node, queue):
                 visited.append(neighbour)
                 queue.append(neighbour)
 
-    
 def createSimpleDict(rules):
     """
     Creates a dictionary object with variables as key values.
@@ -76,7 +71,7 @@ def createSimpleDict(rules):
         dictionary object
     """
     rule_dict = {}
-    
+
     for rule_dicts in rules:
         for left_rule in rule_dicts["LHS"]:
             rule_dict[left_rule] = addAllVar(rule_dicts["RHS"])
@@ -138,7 +133,7 @@ def checkReachableVariable(cfl, visited):
             #     print(left_rule) 
             #     index = cfl.rules.index(rule_dict)
             #     cfl.rules[index]["RHS"] = "_epsilon_".split()
-    
+
 def addAllVar(RHS_elements):
     """
     Function that checks if RHS characters contain an ascii_uppercase (variable)
@@ -146,7 +141,7 @@ def addAllVar(RHS_elements):
     
     Arg:
         RHS_elements (list): list of strings of elements from RHS of a specific
-                             production rule
+                                production rule
 
     Returns:
         list of variables
