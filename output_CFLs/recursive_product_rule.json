@@ -3,9 +3,7 @@
         "S",
         "A",
         "B",
-        "C",
-        "D",
-        "E"
+        "C"
     ],
     "terminals": [
         "a",
@@ -13,44 +11,31 @@
     ],
     "rules": [
         {
-            "LHS": "C",
+            "LHS": "A",
             "RHS": [
                 "b",
-                "a"
+                "SB"
             ]
         },
         {
             "LHS": "S",
             "RHS": [
                 "b",
-                "a"
-            ]
-        },
-        {
-            "LHS": "A",
-            "RHS": [
-                "b",
-                "a"
+                "SB"
             ]
         },
         {
             "LHS": "B",
             "RHS": [
-                "b"
-            ]
-        },
-        {
-            "LHS": "D",
-            "RHS": [
                 "a"
             ]
         },
         {
-            "LHS": "E",
+            "LHS": "C",
             "RHS": [
                 "b"
             ]
         }
     ],
-    "start_var": "C"
+    "start_var": "A"
 }

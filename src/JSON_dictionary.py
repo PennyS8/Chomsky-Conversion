@@ -49,13 +49,14 @@ def export_JSON(output_cfl, output_file_path):
 
     Args:
         output_cfl (json dictionary): cfl data that will be exported.
-        output_file_path (string): filepath location where modified data should be stored.
+        output_file_path (string): filepath location where modified
+        data should be stored.
     """
     file_name = os.path.basename(output_file_path)
 
     if os.path.exists(output_file_path):
-        sys.stdout.write("\nWarning!: Output file " + file_name +
-            " was overwritten")
+        sys.stdout.write("Warning!: Output file " + file_name +
+            " was overwritten\n")
 
     with open(output_file_path, "w") as file:
         json.dump(output_cfl.__dict__, file, indent=4)

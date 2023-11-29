@@ -21,10 +21,11 @@ def new_var(vars):
     # append ints if we run out of letters
     n = 0
     while True:
-        new_var = f"_{n}"
-        if new_var not in vars:
-            vars.append(new_var)
-            return new_var
+        for letter in all_letters:
+            new_var = letter + f"_{n}"
+            if new_var not in vars:
+                vars.append(new_var)
+                return new_var
         n += 1
 
 def check_proper_form(cfl):
@@ -83,10 +84,6 @@ def check_proper_form(cfl):
                 else:
                     used_terminals.add(symbol)
 
-    # if not set(used_vars).issubset(set(cfl.vars)):
-    #     raise ValueError("Input CFL is not in proper form: " + 
-    #                     "Variables list is not comprehensive")
-
     if not set(used_terminals).issubset(set(cfl.terminals)):
         raise ValueError("Input CFL is not in proper form: " + 
                         "Terminals list is not comprehensive")
@@ -107,7 +104,8 @@ def product_to_list(product):
     splits up the product by its variables/terminals and returns the list
 
     Args:
-        product (string): string of an element contained in RHS of particular rule
+        product (string): string of an element contained
+        in RHS of particular rule
     """
 
     element_list = []
@@ -136,7 +134,7 @@ def printCFL(cfl, name):
     Args:
         cfl (json dictionary): dictionary of 4 tuple cfl
         name (string): Custom name that is used to identify cfl in its various stages.
-                       Usefull when there are many print statements.
+                        Usefull when there are many print statements.
 
     """
     print("\n", name)

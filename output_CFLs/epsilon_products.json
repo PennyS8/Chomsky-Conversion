@@ -5,71 +5,101 @@
         "B",
         "C",
         "D",
-        "E"
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J"
     ],
     "terminals": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
     ],
     "rules": [
         {
-            "LHS": "E",
+            "LHS": "D",
             "RHS": [
-                "S",
-                ""
+                "",
+                "AE",
+                "b",
+                "GH",
+                "BC",
+                "a",
+                "AC",
+                "AB"
             ]
         },
         {
             "LHS": "S",
             "RHS": [
-                "A",
-                "B",
-                "C",
-                "ABCD",
-                "BCD",
-                "ABD",
-                "ABC",
-                "ACD",
-                "BD",
+                "AE",
+                "b",
+                "IJ",
                 "BC",
-                "CD",
-                "AB",
-                "AD",
+                "a",
                 "AC",
-                "D"
+                "AB"
             ]
         },
         {
             "LHS": "A",
             "RHS": [
-                "aBa",
-                "aa"
+                "AE",
+                "b",
+                "BC",
+                "a"
             ]
         },
         {
             "LHS": "B",
-            "RHS": []
+            "RHS": [
+                "b"
+            ]
         },
         {
             "LHS": "C",
             "RHS": [
-                "cAB",
-                "CA",
-                "cB",
-                "cA",
-                "C",
-                "A",
-                "c"
+                "AE",
+                "a"
             ]
         },
         {
-            "LHS": "D",
+            "LHS": "E",
             "RHS": [
-                "d"
+                "a"
+            ]
+        },
+        {
+            "LHS": "F",
+            "RHS": [
+                "b"
+            ]
+        },
+        {
+            "LHS": "G",
+            "RHS": [
+                "A"
+            ]
+        },
+        {
+            "LHS": "H",
+            "RHS": [
+                "BC"
+            ]
+        },
+        {
+            "LHS": "I",
+            "RHS": [
+                "A"
+            ]
+        },
+        {
+            "LHS": "J",
+            "RHS": [
+                "BC"
             ]
         }
     ],
-    "start_var": "E"
+    "start_var": "D"
 }
