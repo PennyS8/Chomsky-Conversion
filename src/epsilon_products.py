@@ -9,18 +9,18 @@ def remove_epsilons(cfl):
     """
     e_set = set() # set of variables that terminate to epsilon
     
-    findEpsilon(cfl, e_set)
+    find_epsilon(cfl, e_set)
 
     e_list = list(e_set)
 
     # filters cfl rules to contain non epsilons on RHS.
     # However, if the only value on RHS is epsilon,
     # because we don't want to remove variable that is part of the set.
-    cfl.rules = nonEpsilonList(cfl)
+    cfl.rules = non_epsilon_list(cfl)
 
     visited = []
 
-    moveEpsilon(cfl, visited, e_list)
+    move_epsilon(cfl, visited, e_list)
 
 
     # There is a possibility that the LHS of rule may not be accessed
@@ -28,33 +28,69 @@ def remove_epsilons(cfl):
     # so we track LHS and see if it hasn't been visited yet and cycle
     # through the function calls in a for loop to make sure that all
     # epsilon transitions that are pointing to variables other than
-    # starting variable gets removed/moved to different location (and cycle again).
+    # starting variable gets removed/moved to different location (and
+    # cycle again).
     for rule in cfl.rules:
         for LHS in rule["LHS"]:
             if LHS not in visited and rule["LHS"] != cfl.start_var:
 
                 loop_e_set = set()
-                findEpsilon(cfl, loop_e_set)
-    
+                find_epsilon(cfl, loop_e_set)
+
                 loop_e_list = list(loop_e_set)
 
-                cfl.rules = nonEpsilonList(cfl)
+                cfl.rules = non_epsilon_list(cfl)
 
-                moveEpsilon(cfl, visited, loop_e_list)
+                move_epsilon(cfl, visited, loop_e_list)
+
+    # remove rules that contain no products and their variables in other
+    # rules' products, and in the variables list
+    remove_empty_rules(cfl)
+
+    final_results(cfl)
+
+
+def remove_empty_rules(cfl):
+    """
+    Remove rules with no products and remove the LHS
+    variable from the vars list
     
-    finalResults(cfl)
-    
+    Args:
+        cfl (json dictionary): dictionary of 4 tuple cfl
+    """
+    # this will iterate for the maximum amount possible for there to be a chain
+    # of empty rules removed due to epsilon removals and rule simplifications
+    for _ in range(len(cfl.vars)):
+        # creates a list of the rules that have no products
+        empty_rules = [rule for rule in cfl.rules if len(rule["RHS"]) == 0]
 
+        for rule in empty_rules:
+            # Remove the LHS variable from the vars list
+            if rule["LHS"] in cfl.vars:
+                cfl.vars.remove(rule["LHS"])
 
-def moveEpsilon(cfl, visited, e_list):
+            # Remove products that contain the LHS variable
+            for other_rule in cfl.rules:
+                updated_rhs = []
+                for product in other_rule["RHS"]:
+                    if rule["LHS"] not in product:
+                        updated_rhs.append(product)
+                other_rule["RHS"] = updated_rhs
+
+            # Remove the empty rule from the cfl rules
+            cfl.rules.remove(rule)
+
+def move_epsilon(cfl, visited, e_list):
     """
     Function that checks RHS of rules to see if epsilon exists, and if so
-    retrieve the pointer to the Variable to access rules contained in that and append it.
+    retrieve the pointer to the Variable to access rules contained
+    in that and append it.
 
     Args:
         cfl (json dictionary): dictionary of 4 tuple cfl
         visited (list): list of all Variables visited so far
-        e_list (list): list that contains Variables whose rule includes an epsilon transition 
+        e_list (list): list that contains Variables whose rule includes an
+                        epsilon transition 
     """
 
     # if a rule has a product with a variable in e_list, then duplicate that
@@ -71,7 +107,7 @@ def moveEpsilon(cfl, visited, e_list):
                         if et_var not in visited:
                             visited.append(et_var)
 
-def findEpsilon(cfl, e_set_list):
+def find_epsilon(cfl, e_set_list):
     """
     Function that finds epsilon from rule and stores the Variable that
     has the epsilon into a list to be referenced for other filters.
@@ -90,7 +126,7 @@ def findEpsilon(cfl, e_set_list):
                     e_set_list.add(rule["LHS"])
                     rule["RHS"].pop(i) # remove item from the product list
 
-def nonEpsilonList(cfl):
+def non_epsilon_list(cfl):
     """
     Function that creates a list containing rules excluding epsilons.
 
@@ -106,7 +142,7 @@ def nonEpsilonList(cfl):
     
     return results
 
-def finalResults(cfl):
+def final_results(cfl):
     """
     Filter that removes all epsilon transitions excluding
     starting variable. This should only be called at the very end
