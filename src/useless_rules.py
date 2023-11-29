@@ -1,161 +1,73 @@
 import string
+from helper import product_to_list
 
-"""
-Elimating useless variables has two parts.
-1) Removing variables that don't generate anything (not derivable from Start state)
-2) Removing variables that are unreachable from start symbol.
-"""
 def remove_useless_rules(cfl):
     """
-    Function that iterates through each production rule index,
-    grab value in RHS and see if it is part of the variable set.
-    If it's not, delete that index.
-
-    This is the function called by main.py that is used to check
-    all parts of production rule to detect useless variables.
-
-    Args:
-        cfl (json dictionary): dictionary of 4 tuple cfl
+    Remove variables that don't generate anything. Then remove variables that
+    are unreachable from start symbol.
     """
+    # remove products with vars/terminals that are not in var/terminal list
     for rule_dict in cfl.rules:
         for right_rule in rule_dict["RHS"]:
-            # we will assume all variables are of length 1 for now and
-            # check if it's upper case as that's what variables are usually.
-            if len(right_rule) == 1 and right_rule in string.ascii_uppercase:
-                #print(right_rule)
-                checkProductionRuleRHS(cfl, rule_dict, right_rule)
+            # splits up the product into a list by its variable/terminals
+            product_list = product_to_list(right_rule)
 
-    checkProductionRuleLHS(cfl)
+            if len(product_list) == 0: # check for epsilon edge case
+                right_rule == ""
 
-    test = createSimpleDict(cfl.rules)
+            # remove product if it contains invalid var or terminal
+            for symbol in product_list:
+                if symbol not in cfl.vars and symbol not in cfl.terminals:
+                    rule_dict.remove(right_rule)
 
-    visited = [] # List to keep track of visited nodes.
-    queue = [] # Initialize a queue
 
-    bfs(visited, test, cfl.start_var, queue)
-
-    checkReachableVariable(cfl, visited)
-
-def bfs(visited, graph, node, queue):
-    """
-    Breadth-first-search algorithm used to find all reachable states based on input.
-    Reference: https://favtutor.com/blogs/breadth-first-search-python to help me create
-    BFS algorithm in python.
-
-    Args:
-        visited (list): list that contains all visited states from graph
-        graph (dictionary): dictionary that contains all production rules.
-        node (string): Current state
-        queue (list): contains list of states currently in queue
-    """
-    visited.append(node)
-    queue.append(node)
-
-    while queue:
-        s = queue.pop(0) 
-
-        for neighbour in graph[s]:
-            if neighbour not in visited:
-                visited.append(neighbour)
-                queue.append(neighbour)
-
-def createSimpleDict(rules):
-    """
-    Creates a dictionary object with variables as key values.
-    This makes it simpler to perform BFS to detect reachable states.
-
-    Args:
-        rules (list): list that contains dictionary of production rules
-
-    Returns:
-        dictionary object
-    """
-    rule_dict = {}
-
-    for rule_dicts in rules:
-        for left_rule in rule_dicts["LHS"]:
-            rule_dict[left_rule] = addAllVar(rule_dicts["RHS"])
-
-    return rule_dict
-
-def checkProductionRuleRHS(cfl, rule_dict, rule_rhs):
-    """
-    Function that removes index from RHS if the variable is not part of variable set.
-
-    Args:
-        cfl (json dictionary): dictionary of 4 tuple cfl
-        rule_dict (list): list of production rules
-        rule_rhs (list): list of all variables from RHS.
-    """
-    for var in rule_rhs:
-        if var not in cfl.vars:
-            rule_dict["RHS"].remove(var)
-
-def checkProductionRuleLHS(cfl):
-    """
-    Function that looks at all the variables from LHS, check if variables are part of variable set, and if not
-    remove.
-
-    Args:
-        cfl (json dictionary): dictionary of 4 tuple cfl
-    """
+    # Function that looks at all the variables from LHS, check if variable
+    # are part of variable set, and if not remove.
     for rule_dict in cfl.rules:
         for left_rule in rule_dict["LHS"]:
             if left_rule not in cfl.vars:
-                cfl.rules.pop(cfl.rules.index(rule_dict))
+                cfl.rules.remove(rule_dict)
 
-def checkReachableVariable(cfl, visited):
-    """
-    Function that checks if LHS of production rule variables are in the list of
-    visted (reachable) variables and removes them if unreachable.
 
-    Args:
-        cfl (json dictionary): dictionary of 4 tuple cfl
-        visited (list): list of all variables that were reachable from the starting state
-    """
+    # Remove variables that don't generate anything. Then remove variables that
+    # are unreachable from the start symbol.
+    reachable_vars = set([cfl.start_var])  # Initialize with the start variable
+
+    # Iterate until no new reachable variables are found
+    while True:
+        num_reachable_vars = len(reachable_vars)
+
+        for rule_dict in cfl.rules:
+            lhs = rule_dict["LHS"]
+
+            # If the LHS is reachable or it appears in the product of a
+            # reachable variable's rule, mark it as reachable
+            if lhs in reachable_vars:
+                reachable_vars.add(lhs)
+            else:
+                # Check each product in the RHS for the LHS variable
+                for product in rule_dict["RHS"]:
+                    if lhs in product_to_list(product):
+                        reachable_vars.add(lhs)
+                        # we've found a reachable symbol in the RHS, break
+                        break 
+
+        # Break the loop if no new reachable variables are found
+        if len(reachable_vars) == num_reachable_vars:
+            break
+
+    # Remove rules with unreachable LHS using a for loop
+    new_rules = []
     for rule_dict in cfl.rules:
-        for left_rule in rule_dict['LHS']:
+        if rule_dict["LHS"] in reachable_vars:
+            new_rules.append(rule_dict)
 
-            # if LHS can't be reachable, remove from production rule
-            if left_rule not in visited:
-                cfl.rules.pop(cfl.rules.index(rule_dict))
+    cfl.rules = new_rules
 
-                # remove from list of variables aswell
-                if left_rule in cfl.vars:
-                    cfl.vars.pop(cfl.vars.index(left_rule))
+    # Remove variables that don't generate anything using a for loop
+    new_vars = []
+    for var in cfl.vars:
+        if var in reachable_vars:
+            new_vars.append(var)
 
-            # if RHS of a production rule is empty but it's still a reachable state
-            # then modify the production rule to have _epsilon_ transition to prevent possible errors
-            # 
-            # Ex: if W -> (blank) and it's still a reachable production rule and part of variable list
-            # then W -> _epsilon_       
-            # if left_rule in visited and len(rule_dict['RHS']) == 0:
-            #     print(left_rule) 
-            #     index = cfl.rules.index(rule_dict)
-            #     cfl.rules[index]["RHS"] = "_epsilon_".split()
-
-def addAllVar(RHS_elements):
-    """
-    Function that checks if RHS characters contain an ascii_uppercase (variable)
-    and appends it to the list of reachable variables
-    
-    Arg:
-        RHS_elements (list): list of strings of elements from RHS of a specific
-                                production rule
-
-    Returns:
-        list of variables
-
-    """
-    reachable_var_list = []
-
-    for element in RHS_elements:
-
-        # checks each character from string
-        for letters in element:
-
-            # we have found a variable
-            if letters in string.ascii_uppercase:
-                reachable_var_list.append(letters)
-    
-    return reachable_var_list
+    cfl.vars = new_vars

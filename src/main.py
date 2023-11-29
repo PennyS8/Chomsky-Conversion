@@ -7,6 +7,7 @@ from useless_rules import remove_useless_rules
 from unit_products import remove_unit_products
 from terminal_products import isolate_terminals
 from variable_groups import remove_variable_groups
+from duplicate_rules import remove_duplicate_rules
 
 # helper functions:
 from JSON_dictionary import import_JSON
@@ -49,13 +50,14 @@ def main(current_path):
 
             # the primary conversion steps to CNF as functions:
             new_start_rule(cfl)
-            remove_useless_rules(cfl)
             remove_epsilons(cfl)
-            remove_variable_groups(cfl)
-            remove_unit_products(cfl)
-            isolate_terminals(cfl)
+            # remove_useless_rules(cfl)
+            # remove_variable_groups(cfl)
+            # remove_unit_products(cfl)
+            # isolate_terminals(cfl)
 
             # export python dictionary as a JSON file
+            export_JSON(cfl, output_file_path)
             export_JSON(cfl, output_file_path)
 
 if __name__ == "__main__":
