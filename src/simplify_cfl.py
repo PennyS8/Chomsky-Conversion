@@ -1,4 +1,5 @@
 from helper import product_to_list
+from unit_products import remove_unit_products
 
 def simplify_rules(cfl):
     """
@@ -42,3 +43,5 @@ def simplify_rules(cfl):
 
     # Update the CFL rules with the unique rules
     cfl.rules = updated_rules
+    
+    remove_unit_products(cfl)

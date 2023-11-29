@@ -1,0 +1,9 @@
+{
+    "vars": ["S", "A"],
+    "terminals": ["a", "b"],
+    "rules": [
+        {"LHS": "S", "RHS": ["A", ""]},
+        {"LHS": "A", "RHS": ["ab", "aAb"]}
+    ],
+    "start_var": "S"
+}

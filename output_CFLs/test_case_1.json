@@ -1,5 +1,7 @@
 {
     "vars": [
+        "S",
+        "T",
         "A",
         "B",
         "C",
@@ -8,36 +10,49 @@
         "F",
         "G",
         "H",
-        "I",
-        "J",
-        "K",
-        "L",
-        "M"
+        "I"
     ],
     "terminals": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
     ],
     "rules": [
         {
-            "LHS": "C",
+            "LHS": "A",
             "RHS": [
-                "HI"
+                "b",
+                "ST",
+                "DE",
+                "TC"
             ]
         },
         {
-            "LHS": "A",
+            "LHS": "S",
             "RHS": [
-                "LM"
+                "b",
+                "FG",
+                "ST",
+                "TC"
+            ]
+        },
+        {
+            "LHS": "T",
+            "RHS": [
+                "HI",
+                "a",
+                "BC"
             ]
         },
         {
             "LHS": "B",
             "RHS": [
-                "AG",
-                "EF"
+                "a"
+            ]
+        },
+        {
+            "LHS": "C",
+            "RHS": [
+                "b"
             ]
         },
         {
@@ -49,57 +64,33 @@
         {
             "LHS": "E",
             "RHS": [
-                "b"
+                "SC"
             ]
         },
         {
             "LHS": "F",
             "RHS": [
-                "c"
+                "a"
             ]
         },
         {
             "LHS": "G",
             "RHS": [
-                "d"
+                "SC"
             ]
         },
         {
             "LHS": "H",
             "RHS": [
-                "AB"
+                "a"
             ]
         },
         {
             "LHS": "I",
             "RHS": [
-                "FG"
-            ]
-        },
-        {
-            "LHS": "J",
-            "RHS": [
-                "AB"
-            ]
-        },
-        {
-            "LHS": "K",
-            "RHS": [
-                "FG"
-            ]
-        },
-        {
-            "LHS": "L",
-            "RHS": [
-                "a"
-            ]
-        },
-        {
-            "LHS": "M",
-            "RHS": [
-                "BF"
+                "TC"
             ]
         }
     ],
-    "start_var": "C"
+    "start_var": "A"
 }

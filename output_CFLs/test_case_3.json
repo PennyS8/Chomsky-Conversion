@@ -9,97 +9,76 @@
         "G",
         "H",
         "I",
-        "J",
-        "K",
-        "L",
-        "M"
+        "J"
     ],
     "terminals": [
         "a",
-        "b",
-        "c",
-        "d"
+        "b"
     ],
     "rules": [
         {
-            "LHS": "C",
+            "LHS": "B",
             "RHS": [
-                "HI"
+                "",
+                "CD",
+                "EF"
             ]
         },
         {
             "LHS": "A",
             "RHS": [
-                "LM"
+                "CD",
+                "IJ"
             ]
         },
         {
-            "LHS": "B",
+            "LHS": "C",
             "RHS": [
-                "AG",
-                "EF"
+                "a"
             ]
         },
         {
             "LHS": "D",
             "RHS": [
-                "a"
+                "b"
             ]
         },
         {
             "LHS": "E",
             "RHS": [
-                "b"
+                "a"
             ]
         },
         {
             "LHS": "F",
             "RHS": [
-                "c"
+                "AD"
             ]
         },
         {
             "LHS": "G",
             "RHS": [
-                "d"
+                "a"
             ]
         },
         {
             "LHS": "H",
             "RHS": [
-                "AB"
+                "AD"
             ]
         },
         {
             "LHS": "I",
             "RHS": [
-                "FG"
+                "a"
             ]
         },
         {
             "LHS": "J",
             "RHS": [
-                "AB"
-            ]
-        },
-        {
-            "LHS": "K",
-            "RHS": [
-                "FG"
-            ]
-        },
-        {
-            "LHS": "L",
-            "RHS": [
-                "a"
-            ]
-        },
-        {
-            "LHS": "M",
-            "RHS": [
-                "BF"
+                "AD"
             ]
         }
     ],
-    "start_var": "C"
+    "start_var": "B"
 }

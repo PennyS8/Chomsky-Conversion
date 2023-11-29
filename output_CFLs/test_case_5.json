@@ -11,33 +11,30 @@
         "I",
         "J",
         "K",
-        "L",
-        "M"
+        "L"
     ],
     "terminals": [
         "a",
         "b",
-        "c",
-        "d"
+        "c"
     ],
     "rules": [
         {
             "LHS": "C",
             "RHS": [
-                "HI"
+                "GH"
             ]
         },
         {
             "LHS": "A",
             "RHS": [
-                "LM"
+                "KL"
             ]
         },
         {
             "LHS": "B",
             "RHS": [
-                "AG",
-                "EF"
+                "AF"
             ]
         },
         {
@@ -61,43 +58,37 @@
         {
             "LHS": "G",
             "RHS": [
-                "d"
+                "KL"
             ]
         },
         {
             "LHS": "H",
             "RHS": [
-                "AB"
+                "BD"
             ]
         },
         {
             "LHS": "I",
             "RHS": [
-                "FG"
+                "KL"
             ]
         },
         {
             "LHS": "J",
             "RHS": [
-                "AB"
+                "BD"
             ]
         },
         {
             "LHS": "K",
             "RHS": [
-                "FG"
+                "a"
             ]
         },
         {
             "LHS": "L",
             "RHS": [
-                "a"
-            ]
-        },
-        {
-            "LHS": "M",
-            "RHS": [
-                "BF"
+                "DE"
             ]
         }
     ],

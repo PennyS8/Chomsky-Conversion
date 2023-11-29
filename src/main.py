@@ -60,7 +60,7 @@ def main(current_path):
             remove_unit_products(cfl)
             isolate_terminals(cfl)
             remove_variable_groups(cfl)
-            
+
             # additional operation to simplify output
             simplify_rules(cfl)
 
