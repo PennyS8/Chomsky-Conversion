@@ -1,8 +1,12 @@
 def remove_unit_products(cfl):
-    '''
+    """
     Removes all products that are a single variable and replaces them with
     the productions of the replaced variable
-    '''
+    
+    Args:
+        cfl (json dictionary): dictionary of 4 tuple cfl
+    """
+
     # create two lists, rules of unit products and rules of unit-free products
     uf_rules = [] # uf_rules = unit-product free rules
     unit_rules = [] # unit_rules = unit-product rules
@@ -28,11 +32,13 @@ def remove_unit_products(cfl):
 
     # Perform iterations up to max_unit_chain
     for _ in range(num_unit_products):
+
         # loop through unit_rules' products & substitute vars from uf_rules list
         new_sub_rules = []
         for unit_rule in unit_rules:
             uf_products = []
             for unit_product in unit_rule["RHS"]:
+
                 # for each unit-product substitute from the uf_rules var's products
                 for uf_rule in uf_rules:
                     if unit_product == uf_rule["LHS"]:

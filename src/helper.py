@@ -4,7 +4,11 @@ def new_var(vars):
     """
     Create a new unique variable and append it to the variables list.
     Note: new_var does not have a rule be default
+    
+    Args:
+        vars (list): list of unique variables in cfl
     """
+
     # generate a list of all capitol letters
     all_letters = list(string.ascii_uppercase)
 
@@ -24,9 +28,13 @@ def new_var(vars):
         n += 1
 
 def check_proper_form(cfl):
-    '''
+    """
     Check if the input CFL is in proper CFL form, if not raise an exception.
-    '''
+
+    Args:
+        cfl (json dictionary): dictionary of 4 tuple cfl
+    """
+
     # Check if all required keys are present
     required_keys = ["vars", "terminals", "rules", "start_var"]
     for key in required_keys:
@@ -95,11 +103,16 @@ def check_proper_form(cfl):
     used_vars = set()
 
 def product_to_list(product):
-    '''
+    """
     splits up the product by its variables/terminals and returns the list
-    '''
+
+    Args:
+        product (string): string of an element contained in RHS of particular rule
+    """
+
     element_list = []
     current_element = ""
+
     # spilt up by start of each element is a letter
     for char in product:
         if char.isalpha():
@@ -108,6 +121,7 @@ def product_to_list(product):
             current_element = char
         else:
             current_element += char
+            
     # append the last element if the string ends with a symbol
     if current_element:
         element_list.append(current_element)
@@ -115,6 +129,16 @@ def product_to_list(product):
     return element_list
 
 def printCFL(cfl, name):
+    """
+    Prints out the contents inside cfl. Useful to call to check
+    what cfl looks like before function calls vs what it looks like after.
+
+    Args:
+        cfl (json dictionary): dictionary of 4 tuple cfl
+        name (string): Custom name that is used to identify cfl in its various stages.
+                       Usefull when there are many print statements.
+
+    """
     print("\n", name)
     print("  Variables: " + ", ".join(cfl.vars))
     print("  Terminals: " + ", ".join(cfl.terminals))

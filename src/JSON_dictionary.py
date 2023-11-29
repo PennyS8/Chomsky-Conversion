@@ -15,6 +15,9 @@ class CFL:
 def import_JSON(input_file_path):
     """
     Creates a CFL object from a JSON file
+
+    Args:
+        input_file_path (string): filepath location + file name
     """
     try:
         file = open(input_file_path, "r")
@@ -43,6 +46,10 @@ def export_JSON(output_cfl, output_file_path):
     """
     Creates a JSON file from CFL object
     Note: will overwrite existing file if the filename already exists,
+
+    Args:
+        output_cfl (json dictionary): cfl data that will be exported.
+        output_file_path (string): filepath location where modified data should be stored.
     """
     file_name = os.path.basename(output_file_path)
 

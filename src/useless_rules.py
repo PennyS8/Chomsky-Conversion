@@ -52,6 +52,7 @@ def bfs(visited, graph, node, queue):
         node (string): Current state
         queue (list): contains list of states currently in queue
     """
+    
     visited.append(node)
     queue.append(node)
 
@@ -75,6 +76,7 @@ def createSimpleDict(rules):
     Returns:
         dictionary object
     """
+
     rule_dict = {}
     
     for rule_dicts in rules:
@@ -92,6 +94,7 @@ def checkProductionRuleRHS(cfl, rule_dict, rule_rhs):
         rule_dict (list): list of production rules
         rule_rhs (list): list of all variables from RHS.
     """
+
     for var in rule_rhs:
         if var not in cfl.vars:
             rule_dict["RHS"].remove(var)
@@ -104,6 +107,7 @@ def checkProductionRuleLHS(cfl):
     Args:
         cfl (json dictionary): dictionary of 4 tuple cfl
     """
+
     for rule_dict in cfl.rules:
         for left_rule in rule_dict["LHS"]:
             if left_rule not in cfl.vars:
@@ -118,6 +122,7 @@ def checkReachableVariable(cfl, visited):
         cfl (json dictionary): dictionary of 4 tuple cfl
         visited (list): list of all variables that were reachable from the starting state
     """
+
     for rule_dict in cfl.rules:
         for left_rule in rule_dict['LHS']:
 
@@ -128,16 +133,6 @@ def checkReachableVariable(cfl, visited):
                 # remove from list of variables aswell
                 if left_rule in cfl.vars:
                     cfl.vars.pop(cfl.vars.index(left_rule))
-
-            # if RHS of a production rule is empty but it's still a reachable state
-            # then modify the production rule to have _epsilon_ transition to prevent possible errors
-            # 
-            # Ex: if W -> (blank) and it's still a reachable production rule and part of variable list
-            # then W -> _epsilon_       
-            # if left_rule in visited and len(rule_dict['RHS']) == 0:
-            #     print(left_rule) 
-            #     index = cfl.rules.index(rule_dict)
-            #     cfl.rules[index]["RHS"] = "_epsilon_".split()
     
 def addAllVar(RHS_elements):
     """
@@ -150,8 +145,8 @@ def addAllVar(RHS_elements):
 
     Returns:
         list of variables
-
     """
+
     reachable_var_list = []
 
     for element in RHS_elements:

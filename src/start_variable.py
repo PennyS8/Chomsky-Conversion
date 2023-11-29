@@ -1,10 +1,14 @@
 from helper import new_var
 
 def new_start_rule(cfl):
-    '''
+    """
     Create a new unique variable. Set it as the new start variable and create
     a rule product to the previous start variable
-    '''
+
+    Args:
+        cfl (json dictionary): dictionary of 4 tuple cfl
+    """
+
     # create a new unique variable
     new_start_var = new_var(cfl.vars)
 
