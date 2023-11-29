@@ -25,7 +25,6 @@ def main(current_path):
                                 when trying to access other files in folder and needing
                                 to reference a location.
     """
-
     input_dir = "input_CFLs"
     output_dir = "output_CFLs"
 
@@ -52,7 +51,7 @@ def main(current_path):
                 check_proper_form(cfl) # not whole encompasing
             except ValueError as e:
                 print(f"Error in file {filename}: {e}")
-                break
+                continue
 
             # the primary conversion steps to CNF as functions:
             new_start_rule(cfl)
@@ -64,7 +63,6 @@ def main(current_path):
             remove_duplicate_rules(cfl)
 
             # export python dictionary as a JSON file
-            export_JSON(cfl, output_file_path)
             export_JSON(cfl, output_file_path)
 
 if __name__ == "__main__":

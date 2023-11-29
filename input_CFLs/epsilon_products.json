@@ -1,12 +1,11 @@
 {
-    "vars": ["S", "A", "B", "C", "D"],
-    "terminals": ["a", "b", "c", "d"],
+    "vars": ["S", "A", "B", "C"],
+    "terminals": ["a", "b"],
     "rules": [
-        {"LHS": "S", "RHS": ["A", "B", "C", "ABCD"]},
-        {"LHS": "A", "RHS": ["aBa", ""]},
-        {"LHS": "B", "RHS": [""]},
-        {"LHS": "C", "RHS": ["cAB", "CA", ""]},
-        {"LHS": "D", "RHS": ["d", ""]}
+        {"LHS": "S", "RHS": ["ABC"]},
+        {"LHS": "A", "RHS": ["", "BC"]},
+        {"LHS": "B", "RHS": ["b", ""]},
+        {"LHS": "C", "RHS": ["Aa", ""]}
     ],
     "start_var": "S"
 }
