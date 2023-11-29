@@ -12,7 +12,6 @@ def remove_variable_groups(cfl):
 
         Args:
             cfl (json dictionary): dictionary of 4 tuple cfl
-            
     '''
     # find each instance of variable groups in rule productions
     for rule in cfl.rules:

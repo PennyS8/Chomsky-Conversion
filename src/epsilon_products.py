@@ -117,11 +117,11 @@ def finalResults(cfl):
     """
     for rule in cfl.rules:
         results = []
-        if rule['LHS'] != cfl.start_var:
+        if rule["LHS"] != cfl.start_var:
             for elements in rule["RHS"]:
-                if elements != '':
+                if elements != "":
                     results.append(elements)
             
             #find the index to update with recent data
             index = cfl.rules.index(rule)
-            cfl.rules[index]['RHS'] = results
+            cfl.rules[index]["RHS"] = results

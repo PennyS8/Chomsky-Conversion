@@ -22,8 +22,8 @@ def main(current_path):
 
     Args:
         current_path (string): filepath where program is running from. Important
-                               when trying to access other files in folder and needing
-                               to reference a location.
+                                when trying to access other files in folder and needing
+                                to reference a location.
     """
 
     input_dir = "input_CFLs"
@@ -56,11 +56,11 @@ def main(current_path):
             
             # the primary conversion steps to CNF as functions:
             new_start_rule(cfl)
+            remove_useless_rules(cfl)
             remove_epsilons(cfl)
-            # remove_useless_rules(cfl)
-            # remove_variable_groups(cfl)
-            # remove_unit_products(cfl)
-            # isolate_terminals(cfl)
+            remove_variable_groups(cfl)
+            remove_unit_products(cfl)
+            isolate_terminals(cfl)
 
             # export python dictionary as a JSON file
             export_JSON(cfl, output_file_path)

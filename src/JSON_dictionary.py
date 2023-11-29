@@ -49,7 +49,8 @@ def export_JSON(output_cfl, output_file_path):
 
     Args:
         output_cfl (json dictionary): cfl data that will be exported.
-        output_file_path (string): filepath location where modified data should be stored.
+        output_file_path (string): filepath location where modified
+        data should be stored.
     """
     file_name = os.path.basename(output_file_path)
 
