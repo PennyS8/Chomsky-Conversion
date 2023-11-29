@@ -11,7 +11,9 @@
         "H",
         "I",
         "J",
-        "K"
+        "K",
+        "L",
+        "M"
     ],
     "terminals": [
         "a",
@@ -23,74 +25,86 @@
         {
             "LHS": "C",
             "RHS": [
-                "DE"
+                "HI"
             ]
         },
         {
             "LHS": "S",
             "RHS": [
-                "DE"
+                "JK"
             ]
         },
         {
             "LHS": "A",
             "RHS": [
-                "FG"
+                "LM"
             ]
         },
         {
             "LHS": "B",
             "RHS": [
-                "AK",
-                "IJ"
+                "EF",
+                "AG"
             ]
         },
         {
             "LHS": "D",
             "RHS": [
-                "AB"
+                "a"
             ]
         },
         {
             "LHS": "E",
             "RHS": [
-                "JK"
+                "b"
             ]
         },
         {
             "LHS": "F",
             "RHS": [
-                "a"
+                "c"
             ]
         },
         {
             "LHS": "G",
             "RHS": [
-                "BJ"
+                "d"
             ]
         },
         {
             "LHS": "H",
             "RHS": [
-                "a"
+                "AB"
             ]
         },
         {
             "LHS": "I",
             "RHS": [
-                "b"
+                "FG"
             ]
         },
         {
             "LHS": "J",
             "RHS": [
-                "c"
+                "AB"
             ]
         },
         {
             "LHS": "K",
             "RHS": [
-                "d"
+                "FG"
+            ]
+        },
+        {
+            "LHS": "L",
+            "RHS": [
+                "D"
+            ]
+        },
+        {
+            "LHS": "M",
+            "RHS": [
+                "BF"
             ]
         }
     ],
