@@ -10,7 +10,7 @@ def remove_unit_products(cfl):
     # create two lists, rules of unit products and rules of unit-free products
     uf_rules = [] # uf_rules = unit-product free rules
     unit_rules = [] # unit_rules = unit-product rules
-    
+
     # unit product conuter to calculate maximum unit product chain possible
     num_unit_products = 0
 
