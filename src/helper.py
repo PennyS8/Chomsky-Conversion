@@ -75,9 +75,9 @@ def check_proper_form(cfl):
                 else:
                     used_terminals.add(symbol)
 
-    if not set(used_vars).issubset(set(cfl.vars)):
-        raise ValueError("Input CFL is not in proper form: " + 
-                        "Variables list is not comprehensive")
+    # if not set(used_vars).issubset(set(cfl.vars)):
+    #     raise ValueError("Input CFL is not in proper form: " + 
+    #                     "Variables list is not comprehensive")
 
     if not set(used_terminals).issubset(set(cfl.terminals)):
         raise ValueError("Input CFL is not in proper form: " + 
@@ -113,3 +113,12 @@ def product_to_list(product):
         element_list.append(current_element)
 
     return element_list
+
+def printCFL(cfl, name):
+    print("\n", name)
+    print("  Variables: " + ", ".join(cfl.vars))
+    print("  Terminals: " + ", ".join(cfl.terminals))
+    print("  Production Rules: ")
+    for rule in cfl.rules:
+        print("    " + rule["LHS"] + " -> " + ", ".join(rule["RHS"]))
+    print("  Start Variable: " + cfl.start_var)

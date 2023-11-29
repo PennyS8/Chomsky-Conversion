@@ -9,13 +9,16 @@
     ],
     "terminals": [
         "a",
-        "b"
+        "b",
+        "c",
+        "d"
     ],
     "rules": [
         {
-            "LHS": "C",
+            "LHS": "E",
             "RHS": [
-                "S"
+                "S",
+                ""
             ]
         },
         {
@@ -23,27 +26,40 @@
             "RHS": [
                 "A",
                 "B",
-                ""
+                "C",
+                "CD",
+                "D"
             ]
         },
         {
             "LHS": "A",
             "RHS": [
-                "a"
+                "aBa",
+                "aa"
+            ]
+        },
+        {
+            "LHS": "B",
+            "RHS": []
+        },
+        {
+            "LHS": "C",
+            "RHS": [
+                "cAB",
+                "CA",
+                "cB",
+                "cA",
+                "C",
+                "A",
+                "c"
             ]
         },
         {
             "LHS": "D",
             "RHS": [
-                "a"
-            ]
-        },
-        {
-            "LHS": "E",
-            "RHS": [
-                "b"
+                "d"
             ]
         }
     ],
-    "start_var": "C"
+    "start_var": "E"
 }
