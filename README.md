@@ -1,5 +1,15 @@
 # Chomsky-Conversion
 
+## Quick DJango/Python Virtual Environment Notes
+
+DJango Version: 5.0
+Python Virtual Environment Version: 3.10.11
+
+To start the django server:
+    1. Activate the Python Virtual Environment (.venv) by running .venv\Scripts\activate
+    2. Navigate to the DJango framework with 'cd chomsky_web'
+    3. Then run 'python manage.py runserver'
+
 ## Table of Contents
 
 - [Chomsky-Conversion](#chomsky-conversion)
