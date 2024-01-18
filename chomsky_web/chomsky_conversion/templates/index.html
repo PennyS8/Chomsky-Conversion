@@ -1,0 +1,227 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chomsky's Calculator - by Penny Silliman &amp; Milton NGuy</title>
+    <link rel='icon' href='chomsky_web/static/images/favicon.png'>
+    <meta charset='utf-8'>
+    <style>
+        body {
+            text-align: center;
+            background: #DFDFDF;
+            margin: 0 30px 100px 30px;
+            font: 14px/18px 'Lucida Grande', 'Segoe UI', sans-serif;
+        }
+
+        h1 {
+            font: bold italic 50px Georgia, serif;
+        }
+
+        #input-form,
+        #conversion-result,
+        #cnf-knowledge,
+        #developers-info {
+            text-align: left;
+            margin: 0 auto;
+            max-width: 800px;
+            margin-top: 20px;
+            padding: 20px;
+            border: 3px solid #fff;
+
+        }
+
+        .text-center {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .text-left {
+            text-align: left;
+            max-width: 800px;
+            margin-left: 30px;
+            line-height:20px;
+        }
+
+        .title-block {
+            font-weight: 700;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-size: 30px;
+            line-height: 1.3;
+            color: #007493;
+        }
+
+        .form__row {
+            max-width: 800px;
+            margin-bottom: 20px;
+            margin-left: 50px;
+        }
+
+        .input-group {
+            max-width: 800px;
+            display: flex;
+        }
+
+        .field-error-group {
+            margin-left: 10px;
+        }
+
+        #convert-button,
+        #clear-data {
+            padding: 5px 10px;
+            font-size: 14px;
+            font-weight: 400;
+            text-align: center;
+            color: #fff;
+            border: 0;
+            cursor: pointer;
+            margin-left: 5px;
+            font: inherit;
+        }
+
+        #convert-button {
+            background-color: #145b6e;
+        }
+
+        #clear-data {
+            background-color: #27722a;
+        }
+
+        #calculator-error {
+            display: block;
+            text-align: center;
+            max-width: 800px;
+            color: red;
+            font-size: 28px;
+            line-height: 30px;
+            padding: 15px 15px 10px;
+            font: inherit;
+            font-weight: 700;
+        }
+
+        #calculator-output {
+            text-align: left;
+        }
+
+        #calculator-output strong {
+            display: block;
+            text-align: center;
+        }
+
+        #calculator-output h3.title-block {
+            text-align: center;
+        }
+
+        #calculator-output li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chomsky's Calculator</h1>
+    <p style="line-height:10px;margin-top:-10px">Developed by Penny Silliman &amp; Milton NGuy</p>
+    <p style="line-height:10px;margin-bottom:20px">Sept - Dec 2023</p>
+
+    <!-- Input Form -->
+    <div id="input-form">
+        <div class="text-center">
+            <h3 class="title-block">INPUT CONTEXT FREE LANGUAGE</h3>
+        </div>
+        <form name="calculator-form" id="calculator-form" method="GET" class="form-calculator">
+            <!-- Variables Input -->
+            <p style="text-align:center;">
+                <strong style="font-weight:700;">[Define CFL Proper Form]</strong>
+            </p>
+            <div class="form__row">
+                <div class="input-group">
+                    <label for="id_vars" style="font-weight:bold;">Variables: </label>
+                    <div class="field-error-group">
+                        <input type="text" value="S, A" class="form__input_point" id="id_vars">
+                    </div>
+                </div>
+            </div>
+            <!-- Alphabet Input -->
+            <div class="form__row">
+                <div class="input-group">
+                    <label for="id_alph" style="font-weight:bold;">Alphabet: </label>
+                    <div class="field-error-group">
+                        <input type="text" value="a, b" class="form__input_point" id="id_alph">
+                    </div>
+                </div>
+            </div>
+            <!-- Production Rules -->
+            <div class="form__row">
+                <div class="input-group">
+                    <label for="id_rule" style="font-weight:bold;">Production Rules: </label>
+                    <div class="field-error-group">
+                        <!-- Much more complexity needed here -->
+                        <input type="text" class="form__input_point" id="id_rule">
+                    </div>
+                </div>
+            </div>
+            <!-- Start Variable -->
+            <div class="form__row">
+                <div class="input-group">
+                    <label for="id_svar" style="font-weight:bold;">Start Variable:</label>
+                    <div class="field-error-group">
+                        <select style="cursor:pointer;margin-left:10px;border:1px solid #c1c1c1;" id="id_svar">
+                            <option value="S">S</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- Convert/Reset Buttons -->
+            <div class="text-center">
+                <input type="submit" id="convert-button" value="CONVERT" class="btn btn_blue">
+                <input type="button" id="clear-data" value="CLEAR ALL" class="btn btn_green">
+            </div>
+        </form>
+    </div>
+
+    <!-- Conversion Info & Result -->
+    <div id="conversion-result">
+        <div id="calculator-input" class="text-center">
+            <h3 class="title-block">INPUT RECEIVED</h3>
+            <p>
+                <strong>[JSON desc of input here]</strong>
+            </p>
+        </div>
+
+        <div class="error" id="calculator-error"></div>
+
+        <div id="calculator-output">
+            <h3 class="title-block">CONVERSION STEPS</h3>
+            <ul id="steps-list" class="text-left" style="margin-bottom:20px;">
+                <li>First, do the thing.</li>
+                <li>Then, do a different thing. </li>
+                <li>Finally, do the last thing.</li>
+            </ul>
+            <h3 class="title-block">CHOMSKY'S NORMAL FORM</h3>
+            <p>
+                <strong>[JSON desc of output here]</strong>
+            </p>
+        </div>
+    </div>
+
+    <!-- Other Info & Details about CNF -->
+    <div id="cnf-knowledge">
+        <div class="text-center">
+            <h3 class="title-block">WHAT IS CHOMSKY?</h3>
+        </div>
+        <p class="text-left">This section contains additional information and details about Chomsky's Normal Form (CNF).</p>
+        <!-- Add your content here -->
+    </div>
+
+    <!-- Extra Details on Development and the Developers -->
+    <div id="developers-info">
+        <div class="text-center">
+            <h3 class="title-block">DEVELOPER DETAILS</h3>
+        </div>
+        <p class="text-left">This section provides extra details about the development of Chomsky's Calculator and information about the developers, Penny Silliman and Milton NGuy.</p>
+        <!-- Add your content here -->
+    </div>
+</body>
+</html>
